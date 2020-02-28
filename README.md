@@ -2,8 +2,6 @@
 App web para renta de vehículos
 
 
-# Notas
-#
 # ACTUALIZAR PYTHON, PIP:
 #python -m pip install --upgrade pip
 #python manage.py migrate
