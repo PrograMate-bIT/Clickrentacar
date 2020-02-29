@@ -1,0 +1,13 @@
+# ACTUALIZAR PYTHON, PIP:
+python -m pip install --upgrade pip
+
+# PARA CREAR EL PROYECTO, etc:
+django-admin startproject Rentadora
+python manage.py migrate
+
+# INSTALAR DEPENDENCIAS:
+pip install django 3.0.3
+pip install django-bootstrap4
+
+# PARA ARRANCAR EL SERVIDOR:
+python manage.py runserver 127.0.0.1:5000
