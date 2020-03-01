@@ -2,7 +2,7 @@
 python -m pip install --upgrade pip
 
 # PARA CREAR EL PROYECTO, etc:
-django-admin startproject Rentadora
+django-admin startproject Clickrentacar
 python manage.py migrate
 
 # INSTALAR DEPENDENCIAS:
