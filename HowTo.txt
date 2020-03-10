@@ -20,7 +20,7 @@ mkdir C:\PrograMate
 cd C:\PrograMate
 django-admin startproject Clickrentacar
 cd Clickrentacar
-python manage.py startapp craAPP
+python manage.py startapp cracAPP
 python manage.py makemigrations
 python manage.py migrate
 
@@ -55,7 +55,7 @@ mkdir C:\PrograMate
 cd C:\PrograMate
 django-admin startproject Clickrentacar
 cd Clickrentacar
-python manage.py startapp craAPP
+python manage.py startapp cracAPP
 python manage.py makemigrations
 python manage.py migrate
 @cls
