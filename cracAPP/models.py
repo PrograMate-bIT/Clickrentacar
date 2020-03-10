@@ -4,3 +4,5 @@ from .models import Ciudad, Cuenta, CuentaAdministrador, CuentaUsuario, Denegaci
     PerfilRenta, RegistroAlquiler, SolicitudAlquiler, SolicitudRegistro, Vehiculo, VehiculoPapeles
 
 # Create your models here.
+
+
