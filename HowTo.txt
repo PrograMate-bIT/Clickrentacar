@@ -1,13 +1,65 @@
-# ACTUALIZAR PYTHON, PIP:
-python -m pip install --upgrade pip
+:: PUEDE EJECUTAR ESTE DOCUMENTO DIRECTAMENTE COMO .BAT O EN CMD
+GOTO instalacionAUTOMATICA
 
-# PARA CREAR EL PROYECTO, etc:
-django-admin startproject Clickrentacar
-python manage.py migrate
+------------------------------------------------------------
+-                         HOW TO:                          -
+------------------------------------------------------------
+
+#PRIMERO QUE NADA DEBE INSTALAR:
+Python 3.8.2  ->  https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe
 
 # INSTALAR DEPENDENCIAS:
-pip install django 3.0.3
+
+python -m pip install --upgrade pip
+pip install django
 pip install django-bootstrap4
 
-# PARA ARRANCAR EL SERVIDOR:
-python manage.py runserver 127.0.0.1:5000
+# CREAR PROYECTO Y APP: (EN VEZ DE CREARLO, BAJENLO DE GIT)
+
+mkdir C:\PrograMate
+cd C:\PrograMate
+django-admin startproject Clickrentacar
+cd Clickrentacar
+python manage.py startapp craAPP
+python manage.py makemigrations
+python manage.py migrate
+
+# PARA CORRER EL SERVER: (ABRIR PUERTOS EN FIREWALL SI ES NECESARIO)
+
+python manage.py runserver 127.0.0.1:8000
+python manage.py runserver 0.0.0.0:8000
+
+------------------------------------------------------------
+
+:instalacionAUTOMATICA
+
+@cls
+@echo ANTES DE CONTINUAR ASEGURESE DE INSTALAR: Python 3.8.2
+@echo.
+@echo. https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe
+@echo.
+@echo.
+@pause
+@cls
+@echo.
+@echo.	# INSTALANDO DEPENDENCIAS #
+@echo.
+python -m pip install --upgrade pip
+pip install django
+pip install django-bootstrap4
+@cls
+@echo.
+@echo.	# CREANDO PROYECTO Y APP #
+@echo.
+mkdir C:\PrograMate
+cd C:\PrograMate
+django-admin startproject Clickrentacar
+cd Clickrentacar
+python manage.py startapp craAPP
+python manage.py makemigrations
+python manage.py migrate
+@cls
+@echo.
+@echo.	# RUN SERVER #
+@echo.
+@python manage.py runserver 127.0.0.1:8000
