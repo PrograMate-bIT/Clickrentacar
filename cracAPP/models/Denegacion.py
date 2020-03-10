@@ -1,7 +1,6 @@
 from django.db import models
 
-from model import CuentaUsuario
-from model import CuentaAdministrador, Pais, Ciudad
+from . import CuentaUsuario, CuentaAdministrador, Pais, Ciudad
 
 
 class Denegacion(models.Model):

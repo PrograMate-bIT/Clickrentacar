@@ -1,6 +1,7 @@
 from django.db import models
 
-from model import CuentaUsuario
+from . import CuentaUsuario
+
 
 class PerfilRenta(models.Model):
     id = models.IntegerField(primary_key=True)

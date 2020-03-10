@@ -1,6 +1,6 @@
 from django.db import models
 
-from model import Pais
+from . import Pais
 
 
 class Ciudad(models.Model):

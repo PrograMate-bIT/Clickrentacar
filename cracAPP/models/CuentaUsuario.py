@@ -1,6 +1,6 @@
 from django.db import models
 
-from model import Pais, Licencia, Ciudad
+from . import Pais, Licencia, Ciudad
 
 
 class Cuenta(models.Model):

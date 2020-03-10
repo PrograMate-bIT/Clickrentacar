@@ -1,6 +1,7 @@
 from django.db import models
 
-from model import PerfilRenta
+from . import PerfilRenta
+
 
 class Licencia(models.Model):
     idLicencia = models.IntegerField(primary_key=True)

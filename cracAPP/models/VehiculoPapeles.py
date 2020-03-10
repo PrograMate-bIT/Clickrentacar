@@ -1,6 +1,7 @@
 from django.db import models
 
-from model import Vehiculo
+from . import Vehiculo
+
 
 class VehiculoPapeles(models.Model):
     idPapeles = models.IntegerField(primary_key=True)
