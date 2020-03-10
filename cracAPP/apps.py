@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class CraappConfig(AppConfig):
-    name = 'craAPP'
+class CracappConfig(AppConfig):
+    name = 'cracAPP'
