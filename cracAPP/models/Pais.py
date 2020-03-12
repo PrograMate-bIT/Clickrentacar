@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Pais(models.Model):
+
     URUGUAY = 'UY'
     ARGENTINA = 'AR'
     BRAZIL = 'BR'
