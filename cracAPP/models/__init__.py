@@ -1,2 +1,4 @@
-from . import Ciudad, Cuenta, CuentaAdministrador, CuentaUsuario, Denegacion, Licencia, Pais, PerfilAlquila, \
-    PerfilRenta, RegistroAlquiler, SolicitudAlquiler, SolicitudRegistro, Vehiculo, VehiculoPapeles
+#from . import ciudad, cuenta, cuentaAdministrador, cuentaUsuario, denegacion, licencia, pais, perfilAlquila, \
+#    perfilRenta, registroAlquiler, solicitudAlquiler, solicitudRegistro, vehiculo, vehiculoPapeles
+
+from . import pais, ciudad, vehiculo, vehiculoPapeles, licencia, cuenta, cuentaUsuario, perfilAlquila
