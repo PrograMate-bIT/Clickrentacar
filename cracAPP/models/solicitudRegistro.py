@@ -3,9 +3,7 @@ from django.db import models
 from . import cuentaUsuario, cuentaAdministrador, pais, ciudad
 
 
-
 class SolicitudRegistro(models.Model):
-
     PENDIENTE = 'PEN'
     APROBADA = 'APR'
     DENEGADA = 'DEN'
