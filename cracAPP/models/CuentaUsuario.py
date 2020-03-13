@@ -1,16 +1,16 @@
 from django.db import models
 
-from . import Pais, Licencia, Ciudad
+from . import pais, ciudad#, licencia
 
 
-class Cuenta(models.Model):
+class Usuario(models.Model):
     ci = models.IntegerField(primary_key=True)
-    pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
-    ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+    pais = models.ForeignKey(pais.Pais, on_delete=models.CASCADE)
+    ciudad = models.ForeignKey(ciudad.Ciudad, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=15)
     apellido = models.CharField(max_length=15)
     fechaNacimiento = models.DateField()
-    libretaConducir = models.ForeignKey(Licencia, on_delete=models.CASCADE)
+    #libretaConducir = models.ForeignKey(to='licencia.Licencia', on_delete=models.CASCADE)
     correoElectronico = models.CharField(max_length=50)
     calle = models.CharField(max_length=50)
     esquina = models.CharField(max_length=50)

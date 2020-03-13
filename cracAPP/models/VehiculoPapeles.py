@@ -1,9 +1,9 @@
 from django.db import models
 
-from . import Vehiculo
+from . import vehiculo
 
 
 class VehiculoPapeles(models.Model):
-    idPapeles = models.IntegerField(primary_key=True)
-    vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
+    id = models.IntegerField(primary_key=True)
+    vehiculo = models.ForeignKey(vehiculo.Vehiculo, on_delete=models.CASCADE)
 

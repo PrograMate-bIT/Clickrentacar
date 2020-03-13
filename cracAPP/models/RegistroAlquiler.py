@@ -2,4 +2,4 @@ from django.db import models
 
 
 class RegistroAlquiler(models.Model):
-    pass
+    id = models.IntegerField(primary_key=True)
