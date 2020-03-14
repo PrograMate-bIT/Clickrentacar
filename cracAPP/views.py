@@ -8,7 +8,7 @@ from django.http import HttpResponse
 def index(request):
     return HttpResponse("ESTE ES EL INDEX.")
 
-def categorias(request, categoria_id):
+def categorys(request, categoria_id):
     return HttpResponse("CATEGORIA: %s" % categoria_id)
 
 def search(request):
@@ -24,7 +24,7 @@ def userLogin(request):
     return HttpResponse("ESTO ES UNA PRUEBA.")
 
 def userPanel(request, usuario_id):
-    return HttpResponse("PANEL DE: %s" % usuario_id)
+    return HttpResponse("ESTO ES UNA PRUEBA.")
 
 def userRegister(request):
     return HttpResponse("ESTO ES UNA PRUEBA.")
