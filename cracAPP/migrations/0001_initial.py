@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -35,7 +34,10 @@ class Migration(migrations.Migration):
             name='Pais',
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
-                ('nombrePais', models.CharField(choices=[('UY', 'Uruguay'), ('AR', 'Argentina'), ('BR', 'Brasil'), ('CL', 'Chile'), ('BO', 'Bolivia'), ('CO', 'Colombia'), ('EC', 'Ecuador'), ('PY', 'Paraguay'), ('PE', 'Perú'), ('VE', 'Venezuela')], default='UY', max_length=2)),
+                ('nombrePais', models.CharField(
+                    choices=[('UY', 'Uruguay'), ('AR', 'Argentina'), ('BR', 'Brasil'), ('CL', 'Chile'),
+                             ('BO', 'Bolivia'), ('CO', 'Colombia'), ('EC', 'Ecuador'), ('PY', 'Paraguay'),
+                             ('PE', 'Perú'), ('VE', 'Venezuela')], default='UY', max_length=2)),
             ],
         ),
         migrations.CreateModel(
@@ -85,13 +87,16 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('nroSolicitud', models.IntegerField()),
-                ('estadoSolicitud', models.CharField(choices=[('PEN', 'Pendiente'), ('APR', 'Aprobada'), ('DEN', 'Denegada')], default='PEN', max_length=3)),
+                ('estadoSolicitud',
+                 models.CharField(choices=[('PEN', 'Pendiente'), ('APR', 'Aprobada'), ('DEN', 'Denegada')],
+                                  default='PEN', max_length=3)),
                 ('fechaSolicitud', models.DateField()),
                 ('horaSolicitud', models.TimeField()),
                 ('fechaGestion', models.DateField()),
                 ('horaGestion', models.TimeField()),
                 ('comentarioAprobador', models.CharField(max_length=100)),
-                ('aprobador', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Administrador')),
+                ('aprobador',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Administrador')),
                 ('ciSolicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
                 ('ciudad', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Ciudad')),
                 ('pais', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Pais')),
@@ -123,7 +128,8 @@ class Migration(migrations.Migration):
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('numeroSolicitud', models.IntegerField()),
                 ('comentarioDenegacion', models.CharField(max_length=100)),
-                ('administradorDenegador', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Administrador')),
+                ('administradorDenegador',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Administrador')),
                 ('ciSolicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
                 ('ciudad', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Ciudad')),
                 ('pais', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Pais')),

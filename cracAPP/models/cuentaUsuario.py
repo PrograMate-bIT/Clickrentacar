@@ -4,7 +4,6 @@ from . import pais, ciudad  # , licencia
 
 
 class Usuario(models.Model):
-
     ci = models.IntegerField(primary_key=True)
     pais = models.ForeignKey(pais.Pais, on_delete=models.CASCADE)
     ciudad = models.ForeignKey(ciudad.Ciudad, on_delete=models.CASCADE)
@@ -20,4 +19,4 @@ class Usuario(models.Model):
     bizz = models.IntegerField(4)
 
     def __str__(self):
-        return str("nombre : "+self.nombre+" apellido: "+self.apellido+" ci: "+self.ci)
+        return str("nombre : " + self.nombre + " apellido: " + self.apellido + " ci: " + self.ci)
