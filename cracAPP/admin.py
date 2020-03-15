@@ -1,18 +1,30 @@
 from django.contrib import admin
-from .models import *
+
+from .models.ciudad import Ciudad
+from .models.cuentaAdministrador import Administrador
+from .models.cuentaUsuario import Usuario
+from .models.denegacion import Denegacion
+from .models.licencia import Licencia
+from .models.pais import Pais
+from .models.perfilAlquila import PerfilAlquila
+from .models.perfilRenta import PerfilRenta
+from .models.registroAlquiler import RegistroAlquiler
+from .models.solicitudAlquiler import SolicitudAlquiler
+from .models.solicitudRegistro import SolicitudRegistro
+from .models.vehiculo import Vehiculo
+from .models.vehiculoPapeles import VehiculoPapeles
 
 # Register your models here.
-admin.site.register(ciudad.Ciudad)
-admin.site.register(cuenta.Cuenta)
-admin.site.register(cuentaAdministrador.Administrador)
-admin.site.register(cuentaUsuario.Usuario)
-admin.site.register(denegacion.Denegacion)
-admin.site.register(licencia.Licencia)
-admin.site.register(pais.Pais)
-admin.site.register(perfilAlquila.PerfilAlquila)
-admin.site.register(perfilRenta.PerfilRenta)
-admin.site.register(registroAlquiler.RegistroAlquiler)
-admin.site.register(solicitudAlquiler.SolicitudAlquiler)
-admin.site.register(solicitudRegistro.SolicitudRegistro)
-admin.site.register(vehiculo.Vehiculo)
-admin.site.register(vehiculoPapeles.VehiculoPapeles)
+admin.site.register(Ciudad)
+admin.site.register(Administrador)
+admin.site.register(Usuario)
+admin.site.register(Denegacion)
+admin.site.register(Licencia)
+admin.site.register(Pais)
+admin.site.register(PerfilAlquila)
+admin.site.register(PerfilRenta)
+admin.site.register(RegistroAlquiler)
+admin.site.register(SolicitudAlquiler)
+admin.site.register(SolicitudRegistro)
+admin.site.register(Vehiculo)
+admin.site.register(VehiculoPapeles)
