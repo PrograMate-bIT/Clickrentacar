@@ -11,8 +11,11 @@ media
 # If you are using PyCharm #
 Clickrentacar/.idea/
 Clickrentacar/.idea
-Clickrentacar\.idea
-Clickrentacar\.idea\
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/Clickrentacar.iml
 .idea/**/workspace.xml 
 .idea/**/tasks.xml 
 .idea/dictionaries 
@@ -25,7 +28,9 @@ Clickrentacar\.idea\
 .idea/**/uiDesigner.xml 
 .idea/**/gradle.xml 
 .idea/**/libraries 
-*.iws /out/ 
+*.iws /out/
+.idea
+.DS_Store
 
 # Python # 
 *.py[cod] 
@@ -117,8 +122,3 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
-.idea/inspectionProfiles/profiles_settings.xml
-.idea/vcs.xml
-.idea/modules.xml
-.idea/misc.xml
-.idea/Clickrentacar.iml
