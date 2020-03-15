@@ -30,12 +30,15 @@ python manage.py runserver 127.0.0.1:8000
 python manage.py runserver 0.0.0.0:8000
 
 
-# PARA EFECTUAR LOS CAMBIOS DE LOS MODELS EN LA DB (CREAR TABLAS)
+# PARA EFECTUAR LOS CAMBIOS DE LOS MODELS EN LA DB: (CREAR TABLAS)
 # primero chequear que no hayan errores: < python manage.py check >
 
 python manage.py makemigrations cracAPP
 python manage.py migrate cracAPP
 python manage.py sqlmigrate cracAPP 0001
+
+# CREAR DJANGO-ADMIN: (Username: admin, Email: admin@clickrentacar.com, Password: admin)
+python manage.py createsuperuser
 
 ------------------------------------------------------------
 
