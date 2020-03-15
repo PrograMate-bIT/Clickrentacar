@@ -25,3 +25,6 @@ class Usuario(models.Model):
     numDireccion = models.IntegerField(4)
     tipoVivienda = VIVIENDA_OPCIONES
     bizz = models.IntegerField(4)
+
+    def __str__(self):
+        return str("nombre : " + self.nombre + " apellido: " + self.apellido + " ci: " + self.ci)
