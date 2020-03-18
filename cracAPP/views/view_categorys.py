@@ -1,9 +1,17 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 
 
-def categorys(request, categoria_id=None):
+def categorys(request):
+    if request.method == 'GET':
+        do_something()
+    elif request.method == 'POST':
+        do_something_else()
+
     return render(request, 'cracAPP/categorys.html')
 
-def category_id(request, categoria_id=None):
-    return HttpResponse("CATEGORIA: %s" % categoria_id)
+
+def category_id(request, categoria_id):
+    titulo = HttpRequest(category_id)
+    # return HttpResponse("CATEGORIA: %s" % categoria_id)
+    return render(request, 'cracAPP/categorys.html', {'title': titulo})
