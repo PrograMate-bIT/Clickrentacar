@@ -16,9 +16,10 @@ class Vehiculo(models.Model):
 
     id = models.IntegerField(primary_key=True)
     marca = models.CharField(default="", max_length=15)
-    anio = models.IntegerField(default=1900, max_length=4)
+    anio = models.IntegerField(default=1900)
     categoria = models.CharField(
         max_length=15,
         choices=CATEGORIA_OPCIONES,
         default=AUTO,
     )
+

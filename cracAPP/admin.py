@@ -13,6 +13,20 @@ from .models.solicitudRegistro import SolicitudRegistro
 from .models.vehiculo import Vehiculo
 from .models.vehiculoPapeles import VehiculoPapeles
 
+from .models.ciudad import Ciudad
+from .models.cuentaAdministrador import Administrador
+from .models.cuentaUsuario import Usuario
+from .models.denegacion import Denegacion
+from .models.licencia import Licencia
+from .models.pais import Pais
+from .models.perfilAlquila import PerfilAlquila
+from .models.perfilRenta import PerfilRenta
+from .models.registroAlquiler import RegistroAlquiler
+from .models.solicitudAlquiler import SolicitudAlquiler
+from .models.solicitudRegistro import SolicitudRegistro
+from .models.vehiculo import Vehiculo
+from .models.vehiculoPapeles import VehiculoPapeles
+
 # Register your models here.
 admin.site.register(Ciudad)
 admin.site.register(Administrador)

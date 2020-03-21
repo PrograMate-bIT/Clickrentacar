@@ -10,9 +10,9 @@ class Usuario(models.Model):
         (CASA, "Casa"),
         (APARTAMENTO, "Apartamento")
     ]
+    ci = models.IntegerField(primary_key=True)
     nombreUsuario = models.CharField(default="", unique=True, max_length=30)
     contrasenia = models.CharField(default="", max_length=30)
-    ci = models.IntegerField(primary_key=True)
     pais = models.ForeignKey(pais.Pais, on_delete=models.CASCADE)
     ciudad = models.ForeignKey(ciudad.Ciudad, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=15)
