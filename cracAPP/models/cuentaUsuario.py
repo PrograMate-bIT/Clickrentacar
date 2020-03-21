@@ -1,6 +1,6 @@
 from django.db import models
 
-from . import pais, ciudad  # , licencia
+from . import ciudad  # , licencia
 
 
 class Usuario(models.Model):
@@ -13,7 +13,6 @@ class Usuario(models.Model):
     ci = models.IntegerField(primary_key=True)
     nombreUsuario = models.CharField(default="", unique=True, max_length=30)
     contrasenia = models.CharField(default="", max_length=30)
-    pais = models.ForeignKey(pais.Pais, on_delete=models.CASCADE)
     ciudad = models.ForeignKey(ciudad.Ciudad, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=15)
     apellido = models.CharField(max_length=15)

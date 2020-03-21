@@ -1,5 +1,5 @@
 from .view_about import about
-from .view_categorys import categorys, category_id
+from .view_categorys import categorys
 from .view_contact import contact
 from .view_index import index
 from .view_search import search

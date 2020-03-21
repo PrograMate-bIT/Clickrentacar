@@ -4,9 +4,11 @@ from django.http import HttpResponse, HttpRequest
 
 def categorys(request):
     if request.method == 'GET':
-        do_something()
+        pass
+        # do_something()
     elif request.method == 'POST':
-        do_something_else()
+        pass
+        # do_something_else()
 
     return render(request, 'cracAPP/categorys.html')
 

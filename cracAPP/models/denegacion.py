@@ -7,7 +7,6 @@ class Denegacion(models.Model):
     id = models.IntegerField(primary_key=True)
     numeroSolicitud = models.IntegerField()
     ciSolicitante = models.ForeignKey(cuentaUsuario.Usuario, on_delete=models.CASCADE)
-    pais = models.ForeignKey(cuentaUsuario.pais.Pais, on_delete=models.CASCADE)
     ciudad = models.ForeignKey(cuentaUsuario.ciudad.Ciudad, on_delete=models.CASCADE)
     tipoDnegacion = models.TextChoices('Alquilar', 'Rentar')
     comentarioDenegacion = models.CharField(max_length=100)

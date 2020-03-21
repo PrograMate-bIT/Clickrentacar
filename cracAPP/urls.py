@@ -6,8 +6,8 @@ app_name = 'clickrentacar'
 
 urlpatterns = [
     path('', views.index, name='inicio'),
-    path('categorias/', views.categorys, name='categorias'),
-    path('categorias/<str:categoria_id>', views.category_id, name='categorias'),  # name='<categoria_id>),
+    path('categorias/<str:categoria_id>', views.categorys, name='categorias'),
+    # path('categorias/<str:categoria_id>', views.category_id, name='categorias'),
     path('busqueda/', views.search, name='busqueda'),
     path('about/', views.about, name='acerca de'),
     path('contacto/', views.contact, name='contacto'),
