@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import date
 from . import ciudad, licencia
 
 
@@ -17,18 +16,18 @@ class Usuario(models.Model):
     ciudad = models.ForeignKey(ciudad.Ciudad, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
-    fechaNacimiento = models.DateField()
-    libretaConducir = models.ForeignKey(licencia.Licencia, on_delete=models.CASCADE)
+    telefono = models.IntegerField(20)
+    fechaNacimiento = models.DateField(blank=False)
+    libretaConducir = models.OneToOneField('cracAPP.Usuario', blank=True, on_delete=models.CASCADE)
     calle = models.CharField(max_length=50)
     esquina = models.CharField(max_length=50)
     numDireccion = models.IntegerField(4)
     tipoVivienda = VIVIENDA_OPCIONES
     bizz = models.IntegerField(4)
-    antiguedad = models.DateField(default=date.today())
+    antiguedad = models.DateField(auto_now_add=True, blank=True)
+
+    class Meta:
+        unique_together = (("nombre", "apellido"),)
 
     def __str__(self):
-        return ("nombre : " + self.nombre + ", apellido: " + self.apellido + ", ci: " + str(
-            self.ci) + ", mail:" + self.mail)
-
-    def __repr__(self):
-        return ""
+        return self.nombreUsuario

@@ -5,9 +5,8 @@ from .models.cuentaAdministrador import Administrador
 from .models.cuentaUsuario import Usuario
 from .models.denegacion import Denegacion
 from .models.licencia import Licencia
-from .models.pais import Pais
 from .models.perfilAlquila import PerfilAlquila
-from .models.perfilRenta import PerfilRenta
+from .models.perfilPropietario import PerfilPropietario
 from .models.registroAlquiler import RegistroAlquiler
 from .models.solicitudAlquiler import SolicitudAlquiler
 from .models.solicitudRegistro import SolicitudRegistro
@@ -20,9 +19,8 @@ admin.site.register(Administrador)
 admin.site.register(Usuario)
 admin.site.register(Denegacion)
 admin.site.register(Licencia)
-admin.site.register(Pais)
 admin.site.register(PerfilAlquila)
-admin.site.register(PerfilRenta)
+admin.site.register(PerfilPropietario)
 admin.site.register(RegistroAlquiler)
 admin.site.register(SolicitudAlquiler)
 admin.site.register(SolicitudRegistro)

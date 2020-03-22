@@ -41,6 +41,9 @@ python manage.py sqlmigrate cracAPP 0001
 # CREAR DJANGO-ADMIN: (Username: admin, Email: admin@clickrentacar.com, Password: admin)
 python manage.py createsuperuser
 
+# ABRIR SHELL: (PARA HACER PRUEBAS DESDE LA CONSOLA)
+python manage.py shell
+
 ------------------------------------------------------------
 
 :instalacionAUTOMATICA
