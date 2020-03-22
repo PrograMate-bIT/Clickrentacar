@@ -1,6 +1,6 @@
 from django.db import models
 
-from . import cuentaUsuario, cuentaAdministrador, pais, ciudad
+from . import cuentaUsuario, cuentaAdministrador, ciudad
 
 
 class SolicitudRegistro(models.Model):
@@ -14,7 +14,6 @@ class SolicitudRegistro(models.Model):
     ]
 
     id = models.IntegerField(primary_key=True)
-    pais = models.ForeignKey(pais.Pais, on_delete=models.CASCADE)
     ciudad = models.ForeignKey(ciudad.Ciudad, on_delete=models.CASCADE)
     ciSolicitante = models.ForeignKey(cuentaUsuario.Usuario, on_delete=models.CASCADE)
     nroSolicitud = models.IntegerField()

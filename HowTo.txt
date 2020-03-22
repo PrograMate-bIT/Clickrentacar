@@ -12,6 +12,7 @@ Python 3.8.2  ->  https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe
 
 python -m pip install --upgrade pip
 pip install django
+pip install peewee
 pip install django-bootstrap4
 
 # CREAR PROYECTO Y APP: (EN VEZ DE CREARLO, BAJENLO DE GIT)
@@ -39,6 +40,9 @@ python manage.py sqlmigrate cracAPP 0001
 
 # CREAR DJANGO-ADMIN: (Username: admin, Email: admin@clickrentacar.com, Password: admin)
 python manage.py createsuperuser
+
+# ABRIR SHELL: (PARA HACER PRUEBAS DESDE LA CONSOLA)
+python manage.py shell
 
 ------------------------------------------------------------
 

@@ -22,4 +22,3 @@ class Vehiculo(models.Model):
         choices=CATEGORIA_OPCIONES,
         default=AUTO,
     )
-
