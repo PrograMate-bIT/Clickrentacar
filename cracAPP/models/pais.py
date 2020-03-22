@@ -31,3 +31,14 @@ class Pais(models.Model):
         choices=PAIS_OPCIONES,
         default=URUGUAY,
     )
+
+    def crear(sender, instance, **kwargs):
+        if kwargs.get('created', False):
+            Profile.objects.get_or_create(user=instance)
+            # print("Se acaba de crear un usuario y su perfil enlazado")
+
+    def __str__(self):
+        return str(self.nombrePais)
+
+    def __repr__(self):
+        return {'id': self.id, 'nombre': self.nombrePais}
