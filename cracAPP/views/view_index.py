@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from ..models.ciudad import Ciudad
+from alquiler.ciudad import Ciudad
 
 
 def index(request):

@@ -1,0 +1,167 @@
+from django.db import models
+
+class Ciudad(models.Model):
+    URUGUAY = 'UY'
+    ARGENTINA = 'AR'
+    BRAZIL = 'BR'
+    CHILE = 'CL'
+    BOLIVIA = 'BO'
+    COLOMBIA = 'CO'
+    ECUADOR = 'EC'
+    PARAGUAY = 'PY'
+    PERU = 'PE'
+    VENEZUELA = 'VE'
+    PAIS_OPCIONES = [
+        (URUGUAY, 'Uruguay'),
+        (ARGENTINA, 'Argentina'),
+        (BRAZIL, 'Brasil'),
+        (CHILE, 'Chile'),
+        (BOLIVIA, 'Bolivia'),
+        (COLOMBIA, 'Colombia'),
+        (ECUADOR, 'Ecuador'),
+        (PARAGUAY, 'Paraguay'),
+        (PERU, 'Perú'),
+        (VENEZUELA, 'Venezuela')
+    ]
+
+    id = models.IntegerField(primary_key=True)
+    ciudad = models.CharField(max_length=30)
+    pais = models.CharField(
+        max_length=2,
+        choices=PAIS_OPCIONES,
+        default=URUGUAY,
+    )
+
+    class Meta:
+        unique_together = (("ciudad", "pais"),)
+
+    def __str__(self):
+        return self.ciudad + ", " + self.pais
+
+class Usuario(models.Model):
+    CASA = "Casa"
+    APARTAMENTO = "Apartamento"
+    VIVIENDA_OPCIONES = [
+        (CASA, "Casa"),
+        (APARTAMENTO, "Apartamento")
+    ]
+    ci = models.IntegerField(primary_key=True)
+    nombreUsuario = models.CharField(default="", unique=True, max_length=30)
+    contrasenia = models.CharField(default="", max_length=30)
+    mail = models.EmailField(default="", unique=True, max_length=50)
+    ciudad = models.ForeignKey(Ciudad, verbose_name="Ciudad", on_delete=models.CASCADE, null=True, blank=True)
+    nombre = models.CharField(max_length=30)
+    apellido = models.CharField(max_length=30)
+    telefono = models.IntegerField(20)
+    fechaNacimiento = models.DateField(blank=False)
+    libretaConducir = models.OneToOneField('cracAPP.Usuario', blank=True, on_delete=models.CASCADE)
+    calle = models.CharField(max_length=50)
+    esquina = models.CharField(max_length=50)
+    numDireccion = models.IntegerField(4)
+    tipoVivienda = VIVIENDA_OPCIONES
+    bizz = models.IntegerField(4)
+    antiguedad = models.DateField(auto_now_add=True, blank=True)
+
+    class Meta:
+        unique_together = (("nombre", "apellido"),)
+
+    def __str__(self):
+        return self.nombreUsuario
+
+class Licencia(models.Model):
+    idLicencia = models.IntegerField(primary_key=True)
+    usuario = models.OneToOneField('cracAPP.Usuario', blank=False, on_delete=models.CASCADE)  #requiere una app
+    catA = models.BooleanField(default=False)
+    catB = models.BooleanField(default=False)
+    catC = models.BooleanField(default=False)
+    catD = models.BooleanField(default=False)
+    catE = models.BooleanField(default=False)
+    catF = models.BooleanField(default=False)
+    catG1 = models.BooleanField(default=False)
+    catG2 = models.BooleanField(default=False)
+    catG3 = models.BooleanField(default=False)
+    catH = models.BooleanField(default=False)
+    vencimiento = models.DateField(blank=False)
+    restricciones = models.IntegerField(2)
+    observaciones = models.CharField(max_length=15)
+
+    def __str__(self):
+        categorias = {'A': self.catA, 'B': self.catB, 'C': self.catC, 'D': self.catD, 'E': self.catE, 'F': self.catF,
+                      'G1': self.catG1, 'G2': self.catG2, 'G3': self.catG3, 'H': self.catH}
+        grupo = []
+        for cat in categorias:
+            if categorias[cat]:
+                grupo.append(cat)
+
+        return "Licencia: " + ', '.join(grupo)
+
+class PerfilAlquila(models.Model):
+    id = models.IntegerField(primary_key=True)
+    cuenta = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    libreta = models.OneToOneField(Licencia, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Arrendador: " + self.nombreUsuario
+
+class PerfilPropietario(models.Model):
+    id = models.IntegerField(primary_key=True)
+    cuenta = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    #vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Propietario:" + self.nombreUsuario
+
+class Administrador(models.Model):
+    id = models.IntegerField(primary_key=True)
+    nombreUsuario = models.CharField(default="", unique=True, max_length=30)
+    contrasenia = models.CharField(default="", max_length=30)
+    nombre = models.CharField(max_length=30)
+    apellido = models.CharField(max_length=30)
+    mail = models.EmailField(default="", unique=True, max_length=50)
+    telefono = models.IntegerField(20)
+    ciudad = models.ForeignKey(Ciudad, verbose_name="Ciudad", on_delete=models.CASCADE, null=True, blank=True)
+    antiguedad = models.DateField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return "Admin: " + self.nombreUsuario
+
+class SolicitudRegistro(models.Model):
+    PENDIENTE = 'PEN'
+    APROBADA = 'APR'
+    DENEGADA = 'DEN'
+    ESTADO_OPCIONES = [
+        (PENDIENTE, 'Pendiente'),
+        (APROBADA, 'Aprobada'),
+        (DENEGADA, 'Denegada'),
+    ]
+
+    id = models.IntegerField(primary_key=True)
+    ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+    ciSolicitante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    nroSolicitud = models.IntegerField()
+    estadoSolicitud = models.CharField(
+        max_length=3,
+        choices=ESTADO_OPCIONES,
+        default=PENDIENTE,
+    )
+    fechaSolicitud = models.DateField()
+    horaSolicitud = models.TimeField()
+    aprobador = models.ForeignKey(Administrador, on_delete=models.CASCADE)
+    fechaGestion = models.DateField()
+    horaGestion = models.TimeField()
+    comentarioAprobador = models.CharField(max_length=100)
+
+    def __str__(self):
+        return "Solicitante: " + self.ciSolicitante
+
+class Denegacion(models.Model):
+    id = models.IntegerField(primary_key=True)
+    ciSolicitante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+    tipoDnegacion = models.TextChoices('Alquilar', 'Arrendar')
+    comentarioDenegacion = models.CharField(max_length=100)
+    administradorDenegador = models.ForeignKey(Administrador, on_delete=models.CASCADE)
+    fechaDenegacion = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return self.tipoDnegacion + " denegado: " + self.comentarioDenegacion
