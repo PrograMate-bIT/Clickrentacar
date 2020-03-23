@@ -54,7 +54,6 @@ class Usuario(models.Model):
     apellido = models.CharField(max_length=30)
     telefono = models.IntegerField(20)
     fechaNacimiento = models.DateField(blank=False)
-    libretaConducir = models.OneToOneField('cracAPP.Usuario', blank=True, on_delete=models.CASCADE)
     calle = models.CharField(max_length=50)
     esquina = models.CharField(max_length=50)
     numDireccion = models.IntegerField(4)
@@ -68,9 +67,25 @@ class Usuario(models.Model):
     def __str__(self):
         return self.nombreUsuario
 
+class PerfilAlquila(models.Model):
+    id = models.IntegerField(primary_key=True)
+    cuenta = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    #libreta = models.OneToOneField(Licencia, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Arrendador: " + self.nombreUsuario
+
+class PerfilPropietario(models.Model):
+    id = models.IntegerField(primary_key=True)
+    cuenta = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    #vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Propietario:" + self.nombreUsuario
+
 class Licencia(models.Model):
     idLicencia = models.IntegerField(primary_key=True)
-    usuario = models.OneToOneField('cracAPP.Usuario', blank=False, on_delete=models.CASCADE)  #requiere una app
+    usuario = models.OneToOneField(PerfilAlquila, blank=False, on_delete=models.CASCADE)  #requiere una app
     catA = models.BooleanField(default=False)
     catB = models.BooleanField(default=False)
     catC = models.BooleanField(default=False)
@@ -94,22 +109,6 @@ class Licencia(models.Model):
                 grupo.append(cat)
 
         return "Licencia: " + ', '.join(grupo)
-
-class PerfilAlquila(models.Model):
-    id = models.IntegerField(primary_key=True)
-    cuenta = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-    libreta = models.OneToOneField(Licencia, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "Arrendador: " + self.nombreUsuario
-
-class PerfilPropietario(models.Model):
-    id = models.IntegerField(primary_key=True)
-    cuenta = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-    #vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "Propietario:" + self.nombreUsuario
 
 class Administrador(models.Model):
     id = models.IntegerField(primary_key=True)
