@@ -1,16 +1,18 @@
 from django.db import models
 
-from . import cuentaUsuario, cuentaAdministrador
+from . import solicitudRegistro, cuentaUsuario, cuentaAdministrador
 
 
 class Denegacion(models.Model):
     id = models.IntegerField(primary_key=True)
-    ciSolicitante = models.ForeignKey(cuentaUsuario.Usuario, on_delete=models.CASCADE)
-    ciudad = models.ForeignKey(cuentaUsuario.ciudad.Ciudad, on_delete=models.CASCADE)
-    tipoDnegacion = models.TextChoices('Alquilar', 'Arrendar')
-    comentarioDenegacion = models.CharField(max_length=100)
-    administradorDenegador = models.ForeignKey(cuentaAdministrador.Administrador, on_delete=models.CASCADE)
+    solicitudDenegada = models.OneToOneField(solicitudRegistro.SolicitudRegistro, related_name='Solicitud',
+                                             on_delete=models.CASCADE)
+    usuarioSolicitante = models.ForeignKey(cuentaUsuario.Usuario, related_name='Solicitante', on_delete=models.CASCADE)
+    tipoDenegacion = models.TextChoices('Alquilar', 'Poropietario')
+    adminDenegador = models.ForeignKey(cuentaAdministrador.Administrador, related_name='Administrador',
+                                       on_delete=models.CASCADE)
+    comentarioDenegacion = models.CharField(max_length=100, blank=False)
     fechaDenegacion = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.tipoDnegacion + " denegado: " + self.comentarioDenegacion
+        return "Perfil " + self.tipoDnegacion + " denegado: " + self.comentarioDenegacion

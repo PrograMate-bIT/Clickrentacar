@@ -1,6 +1,6 @@
 from django.db import models
 
-from . import cuentaUsuario, cuentaAdministrador, ciudad
+from . import cuentaUsuario, cuentaAdministrador
 
 
 class SolicitudRegistro(models.Model):
@@ -14,17 +14,19 @@ class SolicitudRegistro(models.Model):
     ]
 
     id = models.IntegerField(primary_key=True)
-    ciudad = models.ForeignKey(ciudad.Ciudad, on_delete=models.CASCADE)
-    ciSolicitante = models.ForeignKey(cuentaUsuario.Usuario, on_delete=models.CASCADE)
-    nroSolicitud = models.IntegerField()
+    usuarioSolicitante = models.ForeignKey(cuentaUsuario.Usuario, on_delete=models.CASCADE)
+    funcionSolicitada = models.TextChoices('Alquilar', 'Poropietario')
     estadoSolicitud = models.CharField(
         max_length=3,
         choices=ESTADO_OPCIONES,
         default=PENDIENTE,
     )
-    fechaSolicitud = models.DateField()
-    horaSolicitud = models.TimeField()
+    fechaSolicitud = models.DateField(auto_now_add=True, blank=True)
+    horaSolicitud = models.TimeField(auto_now_add=True, blank=True)
     aprobador = models.ForeignKey(cuentaAdministrador.Administrador, on_delete=models.CASCADE)
-    fechaGestion = models.DateField()
-    horaGestion = models.TimeField()
-    comentarioAprobador = models.CharField(max_length=100)
+    fechaGestion = models.DateField(auto_now_add=False, blank=True)
+    horaGestion = models.TimeField(auto_now_add=False, blank=True)
+    comentarioAprobador = models.CharField(max_length=100, null=False)
+
+    def __str__(self):
+        return "Solicitud" + self.funcionSolicitada + ": " + self.estadoSolicitud

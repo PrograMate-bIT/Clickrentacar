@@ -3,7 +3,7 @@ from django.db import models
 
 class Licencia(models.Model):
     idLicencia = models.IntegerField(primary_key=True)
-    usuario = models.OneToOneField('cracAPP.Usuario', blank=False, on_delete=models.CASCADE)  #requiere una app
+    usuario = models.OneToOneField('cracAPP.Usuario', related_name='Titular', blank=False, on_delete=models.CASCADE)
     catA = models.BooleanField(default=False)
     catB = models.BooleanField(default=False)
     catC = models.BooleanField(default=False)
@@ -15,8 +15,8 @@ class Licencia(models.Model):
     catG3 = models.BooleanField(default=False)
     catH = models.BooleanField(default=False)
     vencimiento = models.DateField(blank=False)
-    restricciones = models.IntegerField(2)
-    observaciones = models.CharField(max_length=15)
+    restricciones = models.IntegerField(2, blank=True)
+    observaciones = models.CharField(max_length=15, blank=True)
 
     def __str__(self):
         categorias = {'A': self.catA, 'B': self.catB, 'C': self.catC, 'D': self.catD, 'E': self.catE, 'F': self.catF,

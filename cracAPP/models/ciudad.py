@@ -26,7 +26,7 @@ class Ciudad(models.Model):
     ]
 
     id = models.IntegerField(primary_key=True)
-    ciudad = models.CharField(max_length=30)
+    ciudad = models.CharField(max_length=30, blank=False)
     pais = models.CharField(
         max_length=2,
         choices=PAIS_OPCIONES,

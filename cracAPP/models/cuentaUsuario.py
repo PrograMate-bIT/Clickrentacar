@@ -1,5 +1,5 @@
 from django.db import models
-from . import ciudad, licencia
+from . import ciudad
 
 
 class Usuario(models.Model):
@@ -10,18 +10,19 @@ class Usuario(models.Model):
         (APARTAMENTO, "Apartamento")
     ]
     ci = models.IntegerField(primary_key=True)
-    nombreUsuario = models.CharField(default="", unique=True, max_length=30)
-    contrasenia = models.CharField(default="", max_length=30)
-    mail = models.EmailField(default="", unique=True, max_length=50)
-    ciudad = models.ForeignKey(ciudad.Ciudad, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=30)
-    apellido = models.CharField(max_length=30)
-    telefono = models.IntegerField(20)
+    libretaConducir = models.OneToOneField('cracAPP.Licencia', related_name='Licencia', blank=True,
+                                           on_delete=models.CASCADE)  # Este campo lo llena la aprobacion del admin
+    nombreUsuario = models.CharField(unique=True, max_length=30, blank=False)
+    contrasenia = models.CharField(max_length=30, blank=False)
+    mail = models.EmailField(unique=True, max_length=50, blank=False)
+    ciudad = models.ForeignKey(ciudad.Ciudad, blank=False, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=30, blank=False)
+    apellido = models.CharField(max_length=30, blank=False)
+    telefono = models.IntegerField(20, blank=False)
     fechaNacimiento = models.DateField(blank=False)
-    libretaConducir = models.OneToOneField('cracAPP.Usuario', blank=True, on_delete=models.CASCADE)
-    calle = models.CharField(max_length=50)
+    calle = models.CharField(max_length=50, blank=False)
     esquina = models.CharField(max_length=50)
-    numDireccion = models.IntegerField(4)
+    numDireccion = models.IntegerField(4, blank=False)
     tipoVivienda = VIVIENDA_OPCIONES
     bizz = models.IntegerField(4)
     antiguedad = models.DateField(auto_now_add=True, blank=True)
