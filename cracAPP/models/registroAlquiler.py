@@ -16,6 +16,7 @@ class RegistroAlquiler(models.Model):
     # La diferencia entre la fecha REAL de devolucion y la ACORDADA supone un recargo $$$ por hora a calcular
 
     observaciones = models.CharField(max_length=200, blank=True)
+
     # Habria que incorporar mas atributos en caso de accidente, e incluso una tabla
 
     def __str__(self):

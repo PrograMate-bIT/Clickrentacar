@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -30,7 +29,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('ciudad', models.CharField(max_length=30)),
-                ('pais', models.CharField(choices=[('UY', 'Uruguay'), ('AR', 'Argentina'), ('BR', 'Brasil'), ('CL', 'Chile'), ('BO', 'Bolivia'), ('CO', 'Colombia'), ('EC', 'Ecuador'), ('PY', 'Paraguay'), ('PE', 'Perú'), ('VE', 'Venezuela')], default='UY', max_length=2)),
+                ('pais', models.CharField(
+                    choices=[('UY', 'Uruguay'), ('AR', 'Argentina'), ('BR', 'Brasil'), ('CL', 'Chile'),
+                             ('BO', 'Bolivia'), ('CO', 'Colombia'), ('EC', 'Ecuador'), ('PY', 'Paraguay'),
+                             ('PE', 'Perú'), ('VE', 'Venezuela')], default='UY', max_length=2)),
             ],
             options={
                 'unique_together': {('ciudad', 'pais')},
@@ -72,7 +74,9 @@ class Migration(migrations.Migration):
                 ('bizz', models.IntegerField(verbose_name=4)),
                 ('antiguedad', models.DateField(auto_now_add=True)),
                 ('ciudad', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Ciudad')),
-                ('libretaConducir', models.OneToOneField(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='Licencia', to='cracAPP.Licencia')),
+                ('libretaConducir',
+                 models.OneToOneField(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='Licencia',
+                                      to='cracAPP.Licencia')),
             ],
             options={
                 'unique_together': {('nombre', 'apellido')},
@@ -88,7 +92,9 @@ class Migration(migrations.Migration):
                 ('anio', models.IntegerField(blank=True, default=1900)),
                 ('asientos', models.IntegerField(blank=True, verbose_name=2)),
                 ('puertas', models.IntegerField(blank=True, verbose_name=2)),
-                ('categoria', models.CharField(choices=[('auto', 'Auto'), ('camioneta', 'Camioneta'), ('camion', 'Camion'), ('moto', 'Moto')], default='auto', max_length=15)),
+                ('categoria', models.CharField(
+                    choices=[('auto', 'Auto'), ('camioneta', 'Camioneta'), ('camion', 'Camion'), ('moto', 'Moto')],
+                    default='auto', max_length=15)),
                 ('propietario', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
             ],
         ),
@@ -104,14 +110,18 @@ class Migration(migrations.Migration):
             name='SolicitudRegistro',
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
-                ('estadoSolicitud', models.CharField(choices=[('PEN', 'Pendiente'), ('APR', 'Aprobada'), ('DEN', 'Denegada')], default='PEN', max_length=3)),
+                ('estadoSolicitud',
+                 models.CharField(choices=[('PEN', 'Pendiente'), ('APR', 'Aprobada'), ('DEN', 'Denegada')],
+                                  default='PEN', max_length=3)),
                 ('fechaSolicitud', models.DateField(auto_now_add=True)),
                 ('horaSolicitud', models.TimeField(auto_now_add=True)),
                 ('fechaGestion', models.DateField(blank=True)),
                 ('horaGestion', models.TimeField(blank=True)),
                 ('comentarioAprobador', models.CharField(max_length=100)),
-                ('aprobador', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Administrador')),
-                ('usuarioSolicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
+                ('aprobador',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Administrador')),
+                ('usuarioSolicitante',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
             ],
         ),
         migrations.CreateModel(
@@ -124,7 +134,8 @@ class Migration(migrations.Migration):
                 ('endDate', models.DateField(blank=True)),
                 ('endTime', models.TimeField(blank=True)),
                 ('costoReserva', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('usarioSolicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
+                ('usarioSolicitante',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
                 ('vehiculo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Vehiculo')),
             ],
         ),
@@ -139,7 +150,8 @@ class Migration(migrations.Migration):
                 ('costoPorHora', models.DecimalField(decimal_places=2, max_digits=6)),
                 ('costoPorHoraRecargo', models.DecimalField(blank=True, decimal_places=2, default=0.0, max_digits=6)),
                 ('observaciones', models.CharField(blank=True, max_length=200)),
-                ('tramiteSolicitud', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.SolicitudAlquiler')),
+                ('tramiteSolicitud',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.SolicitudAlquiler')),
             ],
         ),
         migrations.CreateModel(
@@ -147,7 +159,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('cuenta', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
-                ('solicitud', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.SolicitudRegistro')),
+                ('solicitud',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.SolicitudRegistro')),
             ],
         ),
         migrations.CreateModel(
@@ -156,13 +169,15 @@ class Migration(migrations.Migration):
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('cuenta', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Usuario')),
                 ('libreta', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.Licencia')),
-                ('solicitud', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.SolicitudRegistro')),
+                ('solicitud',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cracAPP.SolicitudRegistro')),
             ],
         ),
         migrations.AddField(
             model_name='licencia',
             name='usuario',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='Titular', to='cracAPP.Usuario'),
+            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='Titular',
+                                       to='cracAPP.Usuario'),
         ),
         migrations.CreateModel(
             name='Denegacion',
@@ -170,9 +185,15 @@ class Migration(migrations.Migration):
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('comentarioDenegacion', models.CharField(max_length=100)),
                 ('fechaDenegacion', models.DateTimeField(auto_now_add=True)),
-                ('adminDenegador', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Administrador', to='cracAPP.Administrador')),
-                ('solicitudDenegada', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='Solicitud', to='cracAPP.SolicitudRegistro')),
-                ('usuarioSolicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Solicitante', to='cracAPP.Usuario')),
+                ('adminDenegador',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Administrador',
+                                   to='cracAPP.Administrador')),
+                ('solicitudDenegada',
+                 models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='Solicitud',
+                                      to='cracAPP.SolicitudRegistro')),
+                ('usuarioSolicitante',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Solicitante',
+                                   to='cracAPP.Usuario')),
             ],
         ),
         migrations.AddField(
