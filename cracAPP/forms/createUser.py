@@ -1,5 +1,6 @@
 from django import forms
-from usuario.cuentaUsuario import Usuario
+
+from usuario.models import Usuario
 
 
 class CreateUser(forms.Form):

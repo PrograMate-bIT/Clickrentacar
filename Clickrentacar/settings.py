@@ -35,10 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
-    'alquiler',
-    'usuario',
-    'vehiculo'
+    'cracAPP.apps.CracappConfig',
+    'alquiler.apps.AlquilerConfig',
+    'usuario.apps.UsuarioConfig',
+    'vehiculo.apps.VehiculoConfig',
 ]
 
 MIDDLEWARE = [
