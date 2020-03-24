@@ -16,4 +16,3 @@ TITLE DjangoSrvr:   ( IP Privada: %NetworkIP% )  -  ( IP Publica: %PublicIP% )
 @cd %CD%
 cls
 python manage.py runserver 0.0.0.0:8000
-pause
