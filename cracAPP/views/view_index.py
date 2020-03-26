@@ -18,24 +18,23 @@ def index(request):
             print("--------------------------------------------")
     except Exception as e:
         print(str(e))
-        variable = "variable error"
+        variable = "variable error, el model no anda"
+    atributo1 = str(variable)
+
     try:
-        atributo = variable.ciudad
-    except:
-        atributo = "atributo no anda"
-    try:
-        atributo2 = variable.pais
+        atributo2 = variable.ciudad
     except:
         atributo2 = "atributo2 no anda"
     try:
-        atributo3 = str(variable)
+        atributo3 = variable.pais
     except:
         atributo3 = "atributo3 no anda"
+
 
     return render(request, 'cracAPP/index.html', {'title': titulo,
                                                   'texto': texto,
                                                   'dato': dato,
-                                                  'testPais': atributo,
+                                                  'testPais': atributo1,
                                                   'testPais2': atributo2,
                                                   'testPais3': atributo3,
                                                   })
