@@ -8,16 +8,29 @@ def index(request):
     dato = 123
     titulo = "Click Rent a Carrrr"
 
-    variable = Ciudad(ciudad='Canelones', pais='Uruguay')
     try:
-        variable.save()  # Guarda ciudad en la DB
+        variable = Ciudad(ciudad='Canelones', pais='Uruguay')
+        try:
+            variable.save()  # Guarda ciudad en la DB
+        except:
+            print("--------------------------------------------")
+            print("ya existe " + str(variable)) + "en la db."
+            print("--------------------------------------------")
+    except Exception as e:
+        print(str(e))
+        variable = "variable error"
+    try:
+        atributo = variable.ciudad
     except:
-        print("--------------------------------------------")
-        print("ya existe " + str(variable)) + "en la db."
-        print("--------------------------------------------")
-    atributo = variable.ciudad
-    atributo2 = variable.pais
-    atributo3 = str(variable)
+        atributo = "atributo no anda"
+    try:
+        atributo2 = variable.pais
+    except:
+        atributo2 = "atributo2 no anda"
+    try:
+        atributo3 = str(variable)
+    except:
+        atributo3 = "atributo3 no anda"
 
     return render(request, 'cracAPP/index.html', {'title': titulo,
                                                   'texto': texto,

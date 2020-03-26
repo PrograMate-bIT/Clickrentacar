@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -23,8 +22,12 @@ class Migration(migrations.Migration):
                 ('anio', models.IntegerField(blank=True, default=1900)),
                 ('asientos', models.IntegerField(blank=True, verbose_name=2)),
                 ('puertas', models.IntegerField(blank=True, verbose_name=2)),
-                ('categoria', models.CharField(choices=[('auto', 'Auto'), ('camioneta', 'Camioneta'), ('camion', 'Camion'), ('moto', 'Moto')], default='auto', max_length=15)),
-                ('propietario', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.PerfilPropietario', verbose_name='Propietario')),
+                ('categoria', models.CharField(
+                    choices=[('auto', 'Auto'), ('camioneta', 'Camioneta'), ('camion', 'Camion'), ('moto', 'Moto')],
+                    default='auto', max_length=15)),
+                ('propietario',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.PerfilPropietario',
+                                   verbose_name='Propietario')),
             ],
         ),
         migrations.CreateModel(
@@ -32,7 +35,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('documentacion', models.CharField(max_length=200)),
-                ('vehiculo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='vehiculo.Vehiculo', verbose_name='Vehiculo')),
+                ('vehiculo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='vehiculo.Vehiculo',
+                                               verbose_name='Vehiculo')),
             ],
         ),
     ]

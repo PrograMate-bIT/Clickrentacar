@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -24,8 +23,11 @@ class Migration(migrations.Migration):
                 ('endDate', models.DateField(blank=True)),
                 ('endTime', models.TimeField(blank=True)),
                 ('costoReserva', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('usarioSolicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Usuario', verbose_name='Usuario')),
-                ('vehiculo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='vehiculo.Vehiculo', verbose_name='Vehiculo')),
+                ('usarioSolicitante',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Usuario',
+                                   verbose_name='Usuario')),
+                ('vehiculo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='vehiculo.Vehiculo',
+                                               verbose_name='Vehiculo')),
             ],
         ),
         migrations.CreateModel(
@@ -39,7 +41,9 @@ class Migration(migrations.Migration):
                 ('costoPorHora', models.DecimalField(decimal_places=2, max_digits=6)),
                 ('costoPorHoraRecargo', models.DecimalField(blank=True, decimal_places=2, default=0.0, max_digits=6)),
                 ('observaciones', models.CharField(blank=True, max_length=200)),
-                ('solicitudAlquiler', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='alquiler.SolicitudAlquiler', verbose_name='Usuario')),
+                ('solicitudAlquiler',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='alquiler.SolicitudAlquiler',
+                                   verbose_name='Usuario')),
             ],
         ),
     ]

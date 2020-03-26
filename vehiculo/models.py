@@ -2,6 +2,7 @@ from django.db import models
 
 from usuario.models import PerfilPropietario
 
+
 # Create your models here.
 
 class Vehiculo(models.Model):

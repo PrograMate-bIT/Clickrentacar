@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -30,7 +29,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('ciudad', models.CharField(max_length=30)),
-                ('pais', models.CharField(choices=[('UY', 'Uruguay'), ('AR', 'Argentina'), ('BR', 'Brasil'), ('CL', 'Chile'), ('BO', 'Bolivia'), ('CO', 'Colombia'), ('EC', 'Ecuador'), ('PY', 'Paraguay'), ('PE', 'Perú'), ('VE', 'Venezuela')], default='UY', max_length=2)),
+                ('pais', models.CharField(
+                    choices=[('UY', 'Uruguay'), ('AR', 'Argentina'), ('BR', 'Brasil'), ('CL', 'Chile'),
+                             ('BO', 'Bolivia'), ('CO', 'Colombia'), ('EC', 'Ecuador'), ('PY', 'Paraguay'),
+                             ('PE', 'Perú'), ('VE', 'Venezuela')], default='UY', max_length=2)),
             ],
             options={
                 'unique_together': {('ciudad', 'pais')},
@@ -71,7 +73,8 @@ class Migration(migrations.Migration):
                 ('numDireccion', models.IntegerField(verbose_name=4)),
                 ('bizz', models.IntegerField(verbose_name=4)),
                 ('antiguedad', models.DateField(auto_now_add=True)),
-                ('ciudad', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='usuario.Ciudad', verbose_name='Ciudad')),
+                ('ciudad', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                             to='usuario.Ciudad', verbose_name='Ciudad')),
             ],
             options={
                 'unique_together': {('nombre', 'apellido')},
@@ -82,15 +85,19 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('nroSolicitud', models.IntegerField()),
-                ('estadoSolicitud', models.CharField(choices=[('PEN', 'Pendiente'), ('APR', 'Aprobada'), ('DEN', 'Denegada')], default='PEN', max_length=3)),
+                ('estadoSolicitud',
+                 models.CharField(choices=[('PEN', 'Pendiente'), ('APR', 'Aprobada'), ('DEN', 'Denegada')],
+                                  default='PEN', max_length=3)),
                 ('fechaSolicitud', models.DateField()),
                 ('horaSolicitud', models.TimeField()),
                 ('fechaGestion', models.DateField()),
                 ('horaGestion', models.TimeField()),
                 ('comentarioAprobador', models.CharField(max_length=100)),
-                ('aprobador', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Administrador')),
+                ('aprobador',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Administrador')),
                 ('ciudad', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Ciudad')),
-                ('usuarioSolicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Usuario')),
+                ('usuarioSolicitante',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Usuario')),
             ],
         ),
         migrations.CreateModel(
@@ -98,7 +105,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('cuenta', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='usuario.Usuario')),
-                ('solicitud', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.SolicitudRegistro')),
+                ('solicitud',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.SolicitudRegistro')),
             ],
         ),
         migrations.CreateModel(
@@ -107,7 +115,8 @@ class Migration(migrations.Migration):
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('cuenta', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='usuario.Usuario')),
                 ('libreta', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='usuario.Licencia')),
-                ('solicitud', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.SolicitudRegistro')),
+                ('solicitud',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.SolicitudRegistro')),
             ],
         ),
         migrations.AddField(
@@ -121,7 +130,8 @@ class Migration(migrations.Migration):
                 ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('comentarioDenegacion', models.CharField(max_length=100)),
                 ('fechaDenegacion', models.DateTimeField(auto_now_add=True)),
-                ('administradorDenegador', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Administrador')),
+                ('administradorDenegador',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Administrador')),
                 ('ciSolicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Usuario')),
                 ('ciudad', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuario.Ciudad')),
             ],
@@ -129,6 +139,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='administrador',
             name='ciudad',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='usuario.Ciudad', verbose_name='Ciudad'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    to='usuario.Ciudad', verbose_name='Ciudad'),
         ),
     ]
