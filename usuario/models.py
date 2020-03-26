@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Ciudad(models.Model):
     URUGUAY = 'UY'
     ARGENTINA = 'AR'
@@ -25,7 +26,7 @@ class Ciudad(models.Model):
     ]
 
     id = models.IntegerField(primary_key=True)
-    ciudad = models.CharField(max_length=30)
+    ciudad = models.CharField(max_length=30, blank=False)
     pais = models.CharField(
         max_length=2,
         choices=PAIS_OPCIONES,
@@ -38,6 +39,7 @@ class Ciudad(models.Model):
     def __str__(self):
         return self.ciudad + ", " + self.pais
 
+
 class Usuario(models.Model):
     CASA = "Casa"
     APARTAMENTO = "Apartamento"
@@ -46,17 +48,18 @@ class Usuario(models.Model):
         (APARTAMENTO, "Apartamento")
     ]
     ci = models.IntegerField(primary_key=True)
-    nombreUsuario = models.CharField(default="", unique=True, max_length=30)
-    contrasenia = models.CharField(default="", max_length=30)
-    mail = models.EmailField(default="", unique=True, max_length=50)
-    ciudad = models.ForeignKey(Ciudad, verbose_name="Ciudad", on_delete=models.CASCADE, null=True, blank=True)
+    # libretaConducir = models.OneToOneField('usuario.Licencia', related_name='Licencia', blank=True, on_delete=models.CASCADE)  # Este campo lo llena la aprobacion del admin
+    nombreUsuario = models.CharField(unique=True, max_length=30, blank=False, null=False)
+    contrasenia = models.CharField(max_length=30, blank=False, null=False)
+    mail = models.EmailField(unique=True, max_length=50, blank=False, null=False)
+    ciudad = models.ForeignKey(Ciudad, verbose_name="Ciudad", blank=True, null=True, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
     telefono = models.IntegerField(20)
     fechaNacimiento = models.DateField(blank=False)
-    calle = models.CharField(max_length=50)
+    calle = models.CharField(max_length=50, blank=False)
     esquina = models.CharField(max_length=50)
-    numDireccion = models.IntegerField(4)
+    numDireccion = models.IntegerField(4, blank=False)
     tipoVivienda = VIVIENDA_OPCIONES
     bizz = models.IntegerField(4)
     antiguedad = models.DateField(auto_now_add=True, blank=True)
@@ -67,25 +70,10 @@ class Usuario(models.Model):
     def __str__(self):
         return self.nombreUsuario
 
-class PerfilAlquila(models.Model):
-    id = models.IntegerField(primary_key=True)
-    cuenta = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-    #libreta = models.OneToOneField(Licencia, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "Arrendador: " + self.nombreUsuario
-
-class PerfilPropietario(models.Model):
-    id = models.IntegerField(primary_key=True)
-    cuenta = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-    #vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "Propietario:" + self.nombreUsuario
 
 class Licencia(models.Model):
     idLicencia = models.IntegerField(primary_key=True)
-    usuario = models.OneToOneField(PerfilAlquila, blank=False, on_delete=models.CASCADE)  #requiere una app
+    usuario = models.OneToOneField(Usuario, blank=False, on_delete=models.CASCADE)
     catA = models.BooleanField(default=False)
     catB = models.BooleanField(default=False)
     catC = models.BooleanField(default=False)
@@ -110,6 +98,7 @@ class Licencia(models.Model):
 
         return "Licencia: " + ', '.join(grupo)
 
+
 class Administrador(models.Model):
     id = models.IntegerField(primary_key=True)
     nombreUsuario = models.CharField(default="", unique=True, max_length=30)
@@ -124,6 +113,7 @@ class Administrador(models.Model):
     def __str__(self):
         return "Admin: " + self.nombreUsuario
 
+
 class SolicitudRegistro(models.Model):
     PENDIENTE = 'PEN'
     APROBADA = 'APR'
@@ -136,8 +126,8 @@ class SolicitudRegistro(models.Model):
 
     id = models.IntegerField(primary_key=True)
     ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
-    ciSolicitante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    nroSolicitud = models.IntegerField()
+    usuarioSolicitante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    nroSolicitud = models.IntegerField()  # este valor no es necesario, se usa la id
     estadoSolicitud = models.CharField(
         max_length=3,
         choices=ESTADO_OPCIONES,
@@ -151,7 +141,8 @@ class SolicitudRegistro(models.Model):
     comentarioAprobador = models.CharField(max_length=100)
 
     def __str__(self):
-        return "Solicitante: " + self.ciSolicitante
+        return "Solicitud nº" + str(self.id) + " de " + str(self.usuarioSolicitante)
+
 
 class Denegacion(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -164,3 +155,26 @@ class Denegacion(models.Model):
 
     def __str__(self):
         return self.tipoDnegacion + " denegado: " + self.comentarioDenegacion
+
+
+class PerfilAlquila(models.Model):
+    id = models.IntegerField(primary_key=True)
+    cuenta = models.OneToOneField(Usuario, blank=False, null=False, on_delete=models.CASCADE)
+    solicitud = models.ForeignKey(SolicitudRegistro, blank=False, null=False, on_delete=models.CASCADE)
+    libreta = models.OneToOneField(Licencia, blank=False, null=False, on_delete=models.CASCADE)
+
+    # NOTA: OneToOneField() es equivalente a ForeignKey(unique=True)
+
+    def __str__(self):
+        return "Perfil Alquila: " + str(self.id)
+
+
+class PerfilPropietario(models.Model):
+    id = models.IntegerField(primary_key=True)
+    cuenta = models.OneToOneField(Usuario, blank=False, null=False, on_delete=models.CASCADE)
+    solicitud = models.ForeignKey(SolicitudRegistro, blank=False, null=False, on_delete=models.CASCADE)
+
+    # vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Perfil Propietario: " + str(self.id)

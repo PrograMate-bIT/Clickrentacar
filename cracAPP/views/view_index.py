@@ -3,6 +3,7 @@ from usuario.models import Ciudad
 
 
 def index(request):
+    # TODO ESTO ES UNA PRUEBA
     texto = "texto de prueba"
     dato = 123
     titulo = "Click Rent a Carrrr"
@@ -12,7 +13,7 @@ def index(request):
         variable.save()  # Guarda ciudad en la DB
     except:
         print("--------------------------------------------")
-        print("ya existe " + str(variable))
+        print("ya existe " + str(variable)) + "en la db."
         print("--------------------------------------------")
     atributo = variable.ciudad
     atributo2 = variable.pais
