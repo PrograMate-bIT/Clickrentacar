@@ -4,25 +4,31 @@ from usuario.models import Ciudad
 
 def index(request):
     # TODO ESTO ES UNA PRUEBA
-    texto = "texto de prueba"
-    dato = 123
     titulo = "Click Rent a Carrrr"
+    dato = 1024+1024
+    texto = "texto de prueba"
+    atributo1 = ''
+    atributo2 = ''
+    atributo3 = ''
 
-    variable = Ciudad(ciudad='Canelones', pais='Uruguay')
     try:
-        variable.save()  # Guarda ciudad en la DB
-    except:
-        print("--------------------------------------------")
-        print("ya existe " + str(variable)) + "en la db."
-        print("--------------------------------------------")
-    atributo = variable.ciudad
-    atributo2 = variable.pais
-    atributo3 = str(variable)
+        nueva_ciudad = Ciudad(ciudad='Paysandú', pais='Uruguay')
+        texto = "Intentando guardar ciudades en la DB"
+        atributo1 = "String de la clase: " + str(nueva_ciudad)
+        atributo2 = "Pais: " + nueva_ciudad.pais
+        atributo3 = "Ciudad: " + nueva_ciudad.ciudad
+        try:
+            nueva_ciudad.save()  # Guarda ciudad en la DB
+            texto = "Se guardaró [" + str(nueva_ciudad) + "] en la tabla Ciudades"
+        except:
+            texto = "No se guradó [" + str(nueva_ciudad) + "], ya existe en la db."
+    except Exception as error:
+        texto = "ERROR EN INDEX.PY" + str(error)
 
     return render(request, 'cracAPP/index.html', {'title': titulo,
                                                   'texto': texto,
                                                   'dato': dato,
-                                                  'testPais': atributo,
+                                                  'testPais': atributo1,
                                                   'testPais2': atributo2,
                                                   'testPais3': atributo3,
                                                   })

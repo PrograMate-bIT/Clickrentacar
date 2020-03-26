@@ -4,6 +4,8 @@ from usuario.models import PerfilPropietario
 
 # Create your models here.
 
+# Create your models here.
+
 class Vehiculo(models.Model):
     AUTO = 'auto'
     CAMIONETA = 'camioneta'
