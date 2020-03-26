@@ -5,7 +5,7 @@ from usuario.models import Ciudad
 def index(request):
     # TODO ESTO ES UNA PRUEBA
     titulo = "Click Rent a Carrrr"
-    dato = 1024+1024
+    dato = 1024 + 1024
     texto = "texto de prueba"
     atributo1 = ''
     atributo2 = ''

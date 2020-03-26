@@ -2,7 +2,6 @@ from django.db import models
 
 from usuario.models import PerfilPropietario
 
-# Create your models here.
 
 # Create your models here.
 
