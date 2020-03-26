@@ -1,0 +1,110 @@
+:: PUEDE EJECUTAR ESTE DOCUMENTO DIRECTAMENTE COMO .BAT O EN CMD PARA CREAR UN PROYECTO NUEVO.
+GOTO instalacionAUTOMATICA
+
+------------------------------------------------------------
+-                         HOW TO:                          -
+------------------------------------------------------------
+
+#PRIMERO QUE NADA DEBE INSTALAR:
+Python 3.8.2  ->  https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe
+
+# INSTALAR DEPENDENCIAS:
+
+python -m pip install --upgrade pip
+pip install django
+pip install peewee  # no lo vamos a usar por ahora
+pip install django-bootstrap4 # si sale todo bien lo usamos
+
+# CREAR PROYECTO Y APP: (EN VEZ DE CREARLO, BAJENLO DE GIT)
+
+mkdir C:\PrograMate
+cd C:\PrograMate
+django-admin startproject Clickrentacar
+cd Clickrentacar
+python manage.py startapp cracAPP
+python manage.py startapp alquiler
+python manage.py startapp usuario
+python manage.py startapp vehiculo
+python manage.py makemigrations
+python manage.py migrate
+
+# PARA CORRER EL SERVER: (ABRIR PUERTOS EN FIREWALL SI ES NECESARIO)
+
+python manage.py runserver 127.0.0.1:8000
+python manage.py runserver 0.0.0.0:8000
+
+
+# PARA EFECTUAR LOS CAMBIOS DE LOS MODELS EN LA DB: (CREAR TABLAS)
+# primero chequear que no hayan errores: < python manage.py check >
+
+python manage.py makemigrations cracAPP
+python manage.py migrate cracAPP
+python manage.py sqlmigrate cracAPP 0001  # Da error porque el core no tiene models
+
+python manage.py makemigrations alquiler
+python manage.py migrate alquiler
+python manage.py sqlmigrate alquiler 0001
+
+python manage.py makemigrations usuario
+python manage.py migrate usuario
+python manage.py sqlmigrate usuario 0001
+
+python manage.py makemigrations vehiculo
+python manage.py migrate vehiculo
+python manage.py sqlmigrate vehiculo 0001
+
+# CREAR DJANGO-ADMIN: (Username: admin, Email: admin@clickrentacar.com, Password: admin)
+python manage.py createsuperuser
+
+# ABRIR SHELL: (PARA HACER PRUEBAS DESDE LA CONSOLA)
+python manage.py shell
+
+------------------------------------------------------------
+
+:instalacionAUTOMATICA
+
+@cls
+@echo ANTES DE CONTINUAR ASEGURESE DE INSTALAR: Python 3.8.2
+@echo.
+@echo. https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe
+@echo.
+@echo.
+@pause
+@cls
+@echo.
+@echo.	# INSTALANDO DEPENDENCIAS #
+@echo.
+python -m pip install --upgrade pip
+pip install django
+pip install django-bootstrap4
+@cls
+@echo.
+@echo.	# CREANDO PROYECTO Y APP #
+@echo.
+mkdir C:\PrograMate
+cd C:\PrograMate
+django-admin startproject Clickrentacar
+cd Clickrentacar
+python manage.py startapp cracAPP
+python manage.py startapp alquiler
+python manage.py startapp usuario
+python manage.py startapp vehiculo
+python manage.py makemigrations
+python manage.py migrate
+python manage.py makemigrations cracAPP
+python manage.py migrate cracAPP
+python manage.py sqlmigrate cracAPP 0001
+python manage.py makemigrations alquiler
+python manage.py migrate alquiler
+python manage.py sqlmigrate alquiler 0001
+python manage.py makemigrations usuario
+python manage.py migrate usuario
+python manage.py sqlmigrate usuario 0001
+python manage.py makemigrations vehiculo
+python manage.py migrate vehiculo
+python manage.py sqlmigrate vehiculo 0001
+@cls
+@echo.
+@echo.	# RUN SERVER #
+@echo.
+@python manage.py runserver 127.0.0.1:8000
