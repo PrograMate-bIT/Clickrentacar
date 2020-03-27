@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {{ title|default:"Click Rent a Car" }}
+        {% endblock title %}
+    </title>
+</head>
+<body>
+{% block content %}
+<h1>{{ title }}</h1>
+<p>{% autoescape off %}{{ texto }}{% endautoescape %}</p>
+{% endblock content %}
+</body>
+</html>
