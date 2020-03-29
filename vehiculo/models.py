@@ -18,7 +18,7 @@ class Vehiculo(models.Model):
         (MOTO, 'Moto'),
     ]
 
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     matricula = models.CharField(max_length=12, blank=False, unique=True)
     propietario = models.ForeignKey(PerfilPropietario, verbose_name="Propietario", blank=False, null=False,
                                     on_delete=models.CASCADE)
@@ -38,7 +38,7 @@ class Vehiculo(models.Model):
 
 
 class VehiculoPapeles(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     vehiculo = models.ForeignKey(Vehiculo, verbose_name="Vehiculo", blank=False, null=False, on_delete=models.CASCADE)
     documentacion = models.CharField(max_length=200, blank=False)
 
