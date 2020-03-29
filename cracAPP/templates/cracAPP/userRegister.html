@@ -5,6 +5,12 @@
 {% block content %}
 
 <p>Registro</p>
-{{ register_form }}
+<p1>{{ register_form.nombre_usuario.label }}</p1>{{ register_form.nombre_usuario }}<br>
+{{ register_form.contrasenia }}<br>
+{{ register_form.ci }}<br>
+{{ register_form.pais }}<br>
+{{ register_form.ciudad }}<br>
+{{ register_form.nombre }}<br>
+{{ register_form.apellido }}<br>
 
 {% endblock content %}

@@ -2,7 +2,7 @@ from django import forms
 
 
 class CreateUser(forms.Form):
-    nombre = forms.CharField(label="nombreUsuario", required=True)
+    nombre_usuario = forms.CharField(label="Nombre de usuario", required=True)
     contrasenia = forms.CharField(label="contrasenia", required=True)
     ci = forms.IntegerField(label="cedula", required=True)
     pais = forms.CharField(label="pais", required=True)
