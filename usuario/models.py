@@ -100,7 +100,7 @@ class Licencia(models.Model):
 
 
 class Administrador(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nombreUsuario = models.CharField(default="", unique=True, max_length=30)
     contrasenia = models.CharField(default="", max_length=30)
     nombre = models.CharField(max_length=30)
@@ -124,7 +124,7 @@ class SolicitudRegistro(models.Model):
         (DENEGADA, 'Denegada'),
     ]
 
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
     usuarioSolicitante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     nroSolicitud = models.IntegerField()  # este valor no es necesario, se usa la id
@@ -145,7 +145,7 @@ class SolicitudRegistro(models.Model):
 
 
 class Denegacion(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     ciSolicitante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
     tipoDnegacion = models.TextChoices('Alquilar', 'Arrendar')
@@ -158,7 +158,7 @@ class Denegacion(models.Model):
 
 
 class PerfilAlquila(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     cuenta = models.OneToOneField(Usuario, blank=False, null=False, on_delete=models.CASCADE)
     solicitud = models.ForeignKey(SolicitudRegistro, blank=False, null=False, on_delete=models.CASCADE)
     libreta = models.OneToOneField(Licencia, blank=False, null=False, on_delete=models.CASCADE)
@@ -170,7 +170,7 @@ class PerfilAlquila(models.Model):
 
 
 class PerfilPropietario(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     cuenta = models.OneToOneField(Usuario, blank=False, null=False, on_delete=models.CASCADE)
     solicitud = models.ForeignKey(SolicitudRegistro, blank=False, null=False, on_delete=models.CASCADE)
 
