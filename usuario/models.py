@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Ciudad(models.Model):
     URUGUAY = 'UY'
     ARGENTINA = 'AR'
@@ -30,7 +29,7 @@ class Ciudad(models.Model):
     pais = models.CharField(
         max_length=2,
         choices=PAIS_OPCIONES,
-        default=URUGUAY,
+        default=URUGUAY
     )
 
     class Meta:
@@ -47,25 +46,28 @@ class Usuario(models.Model):
         (CASA, "Casa"),
         (APARTAMENTO, "Apartamento")
     ]
-    ci = models.IntegerField(primary_key=True)
+
+
+    ci = models.IntegerField(verbose_name="ci",primary_key=True, null=False, blank=False)
     # libretaConducir = models.OneToOneField('usuario.Licencia', related_name='Licencia', blank=True, on_delete=models.CASCADE)  # Este campo lo llena la aprobacion del admin
-    nombreUsuario = models.CharField(unique=True, max_length=30, blank=False, null=False)
-    contrasenia = models.CharField(max_length=30, blank=False, null=False)
-    mail = models.EmailField(unique=True, max_length=50, blank=False, null=False)
-    ciudad = models.ForeignKey(Ciudad, verbose_name="Ciudad", blank=True, null=True, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=30)
-    apellido = models.CharField(max_length=30)
-    telefono = models.IntegerField(20)
-    fechaNacimiento = models.DateField(blank=False)
-    calle = models.CharField(max_length=50, blank=False)
-    esquina = models.CharField(max_length=50)
-    numDireccion = models.IntegerField(4, blank=False)
+    nombreUsuario = models.CharField(verbose_name="nombre",unique=True, max_length=30, blank=False, null=False)
+    contrasenia = models.CharField(verbose_name="contrasenia",max_length=30, blank=False, null=False)
+    mail = models.EmailField(verbose_name="Mail",unique=True, max_length=50, blank=False, null=False)
+    ciudad = models.ForeignKey(Ciudad, verbose_name="ciudad", blank=True, null=True, on_delete=models.CASCADE)
+    nombre = models.CharField(verbose_name="nombre",max_length=30)
+    apellido = models.CharField(verbose_name="apellido",max_length=30)
+    telefono = models.IntegerField(verbose_name="telefono")
+    fechaNacimiento = models.DateField(verbose_name="fechaNacimiento",blank=False)
+    calle = models.CharField(verbose_name="calle",max_length=50, blank=False, null=True)
+    esquina = models.CharField(verbose_name="equina",max_length=50, null=True)
+    numDireccion = models.IntegerField(verbose_name="numDireccion",max_length=5, blank=False, null=True)
     tipoVivienda = VIVIENDA_OPCIONES
-    bizz = models.IntegerField(4)
-    antiguedad = models.DateField(auto_now_add=True, blank=True)
+    bizz = models.IntegerField(verbose_name="bizz", null=True)
+    antiguedad = models.DateField(verbose_name="antiguedad",auto_now_add=True, blank=False, null=True)
 
     class Meta:
-        unique_together = (("nombre", "apellido"),)
+        unique_together = ['ci']
+        ordering = ['ci']
 
     def __str__(self):
         return self.nombreUsuario
