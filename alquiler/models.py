@@ -8,7 +8,7 @@ from usuario.models import Usuario
 
 
 class SolicitudAlquiler(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     usarioSolicitante = models.ForeignKey(Usuario, verbose_name="Usuario", blank=False, null=False,
                                           on_delete=models.CASCADE)
     vehiculo = models.ForeignKey(Vehiculo, verbose_name="Vehiculo", null=False, on_delete=models.CASCADE)
@@ -24,7 +24,7 @@ class SolicitudAlquiler(models.Model):
 
 
 class RegistroAlquiler(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     solicitudAlquiler = models.ForeignKey(SolicitudAlquiler, verbose_name="Usuario", null=False,
                                           on_delete=models.CASCADE)  # RESERVA DE SOLICITUD
     startDate = models.DateTimeField(auto_now_add=False, blank=True)  # FECHAS ACORDADAS ENTRE CLIENTE Y PROPIETARIO

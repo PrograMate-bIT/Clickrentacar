@@ -12,7 +12,7 @@ def index(request):
     atributo3 = ''
 
     try:
-        nueva_ciudad = Ciudad(ciudad='Tacuarmebo', pais='Uruguay')
+        nueva_ciudad = Ciudad(ciudad='Paysandú', pais='Uruguay')
         texto = "Intentando guardar ciudades en la DB"
         atributo1 = "String de la clase: " + str(nueva_ciudad)
         atributo2 = "Pais: " + nueva_ciudad.pais
@@ -31,5 +31,4 @@ def index(request):
                                                   'testPais': atributo1,
                                                   'testPais2': atributo2,
                                                   'testPais3': atributo3,
-                                                  # 'sesion' : {'nombredeusuario': nombrUsario,'contraseña':varContraseña, asdasd} # ejemplo de un dicionario dentro de otro dic
                                                   })

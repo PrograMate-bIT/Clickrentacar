@@ -5,12 +5,10 @@
 {% block content %}
 
 <p>Registro</p>
-<p1>{{ register_form.nombre_usuario.label }} </p1>{{ register_form.nombre_usuario }}<br>
-<p1>{{ register_form.contrasenia.label }} </p1>{{ register_form.contrasenia }}<br>
-<p1>{{ register_form.ci.label }} </p1>{{ register_form.ci }}<br>
-<p1>{{ register_form.pais.label }} </p1>{{ register_form.pais }}<br>
-<p1>{{ register_form.ciudad.label }} </p1>{{ register_form.ciudad }}<br>
-<p1>{{ register_form.nombre.label }} </p1>{{ register_form.nombre }}<br>
-<p1>{{ register_form.apellido.label }} </p1>{{ register_form.apellido }}<br>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Registrarme</button>
+</form>
 
 {% endblock content %}

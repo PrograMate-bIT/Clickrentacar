@@ -1,21 +1,22 @@
 from django.urls import path
-
+from . import frontViews
+from .views import UserRegister
 from . import views
 
 app_name = 'clickrentacar'
 
 urlpatterns = [
-    path('', views.index, name='inicio'),
-    path('categorias/', views.categorys, name='categorias'),
-    path('categorias/<str:categoria_id>', views.categorys, name='categorias'),
-    path('busqueda/', views.search, name='busqueda'),
-    path('about/', views.about, name='acerca de'),
-    path('contacto/', views.contact, name='contacto'),
-    path('login/', views.user_login, name='iniciar sesion'),
-    path('panel/<str:usuario_id>', views.user_panel, name='panel de usuario'),
-    path('registro/', views.user_register, name='registrarme'),
-    path('documentacion-usuario/', views.user_document, name='documento de usuario'),
-    path('documentacion-vehiculo/', views.vehicle_document, name='documento de vehiculo'),
-    path('alquilar/', views.vehicle_rent, name='alquilar vehiculo'),
-    path('publicar/', views.vehicle_publish, name='publicar vehiculo'),
+    path('', frontViews.index, name='inicio'),
+    path('categorias/', frontViews.categorys, name='categorias'),
+    path('categorias/<str:categoria_id>', frontViews.categorys, name='categorias'),
+    path('busqueda/', frontViews.search, name='busqueda'),
+    path('about/', frontViews.about, name='acerca de'),
+    path('contacto/', frontViews.contact, name='contacto'),
+    # path('login/', frontViews.user_login, name='iniciar sesion'),
+    path('panel/<str:usuario_id>', frontViews.user_panel, name='panel de usuario'),
+    path('registro/', UserRegister.as_view(), name='registrarme'),
+    path('documentacion-usuario/', frontViews.user_document, name='documento de usuario'),
+    path('documentacion-vehiculo/', frontViews.vehicle_document, name='documento de vehiculo'),
+    path('alquilar/', frontViews.vehicle_rent, name='alquilar vehiculo'),
+    path('publicar/', frontViews.vehicle_publish, name='publicar vehiculo'),
 ]
