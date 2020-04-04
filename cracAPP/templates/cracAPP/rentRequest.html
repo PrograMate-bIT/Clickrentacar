@@ -3,12 +3,12 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block content %}
-
-<p>Template alquilar vehículo</p>
+<h1>Clickrentacar</h1>
+<p>Solicitar alquiler</p>
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
 
-    <button type="submit">Alquilar</button>
+    <button type="submit">Solicitar</button>
 </form>
 
 {% endblock content %}
