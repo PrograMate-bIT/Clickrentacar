@@ -1,9 +1,6 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django import forms
 from django.views.generic import CreateView
-from usuario.models import Ciudad
-from .forms import createUser
+from .forms import createUser, RentalRequest, CarRental
 
 
 class UserRegister(CreateView):
@@ -12,7 +9,6 @@ class UserRegister(CreateView):
     reverse_lazy = '/registro'
 
     def get_success_url(self):
-
         return reverse_lazy(UserRegister)
 
     def get_form(self, form_class=None):
@@ -20,21 +16,26 @@ class UserRegister(CreateView):
 
         return form
 
+class RentalRequestInsert(CreateView):
+    form_class = RentalRequest
+    template_name = "cracAPP/rentRequest.html"
+    reverse_lazy = '/index'
 
-def user_register(request):
-    try:
-        register_form = UserRegister.get_form()
-        text = 'anda'
-        return render(request, 'cracAPP/userRegister.html', {'register_form': register_form, 'mensaje': text})
-    except Exception as error:
-        register_form = 'ERROR EN EL FORM: ' + str(error)
-        text = 'no anda'
-    return render(request, 'cracAPP/userRegister.html', {'register_form': register_form, 'mensaje': text})
+    def get_success_url(self):
+        return reverse_lazy(RentalRequestInsert)
 
-# def user_login(request):
-# try:
-#    login_form = Login()
-#    return render(request, 'cracAPP/userLogin.html', login_form)
-# except Exception as error:
-#    login_form = 'ERROR EN EL FORM: ' + str(error)
-# return render(request, 'cracAPP/userLogin.html', login_form)
+    def get_form(self, form_class=None):
+        form = super(RentalRequestInsert, self).get_form()
+        return form
+
+class CarRental(CreateView):
+    form_class = CarRental
+    template_name = "cracAPP/vehicleRent.html"
+    reverse_lazy = '/index'
+
+    def get_success_url(self):
+        return reverse_lazy(CarRental)
+
+    def get_form(self, form_class=None):
+        form = super(CarRental, self).get_form()
+        return form

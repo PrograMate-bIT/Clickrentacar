@@ -1,6 +1,6 @@
 from django.urls import path
 from . import FrontViews
-from .views import UserRegister
+from .views import UserRegister, RentalRequestInsert, CarRental
 from . import views
 
 app_name = 'clickrentacar'
@@ -17,6 +17,7 @@ urlpatterns = [
     path('registro/', UserRegister.as_view(), name='registrarme'),
     path('documentacion-usuario/', FrontViews.user_document, name='documento de usuario'),
     path('documentacion-vehiculo/', FrontViews.vehicle_document, name='documento de vehiculo'),
-    path('alquilar/', FrontViews.vehicle_rent, name='alquilar vehiculo'),
+    path('solicitar/', RentalRequestInsert.as_view(), name='solicitar'),
+    path('alquilar/', CarRental.as_view(), name='alquilar vehiculo'),
     path('publicar/', FrontViews.vehicle_publish, name='publicar vehiculo'),
 ]

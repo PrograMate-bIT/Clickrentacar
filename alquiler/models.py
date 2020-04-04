@@ -9,7 +9,7 @@ from usuario.models import Usuario
 
 class SolicitudAlquiler(models.Model):
     id = models.IntegerField(primary_key=True)
-    usarioSolicitante = models.ForeignKey(Usuario, verbose_name="Usuario", blank=False, null=False,
+    usarioSolicitante = models.ForeignKey(Usuario, verbose_name="usuarioSolicitante", blank=False, null=False,
                                           on_delete=models.CASCADE)
     vehiculo = models.ForeignKey(Vehiculo, verbose_name="Vehiculo", null=False, on_delete=models.CASCADE)
     fechaSolicitud = models.DateTimeField(auto_now_add=True, blank=True)  # fecha del pedido
@@ -27,9 +27,6 @@ class RegistroAlquiler(models.Model):
     id = models.IntegerField(primary_key=True)
     solicitudAlquiler = models.ForeignKey(SolicitudAlquiler, verbose_name="Usuario", null=False,
                                           on_delete=models.CASCADE)  # RESERVA DE SOLICITUD
-    startDate = models.DateTimeField(auto_now_add=False, blank=True)  # FECHAS ACORDADAS ENTRE CLIENTE Y PROPIETARIO
-    endDate = models.DateTimeField(auto_now_add=False, blank=True)
-    entregaDateReal = models.DateTimeField(auto_now_add=False, blank=True)  # FECHAS REALES de RETIRO Y DEVOLUCION
     devolucionDateReal = models.DateTimeField(auto_now_add=False, blank=False)
     costoPorHora = models.DecimalField(max_digits=6, decimal_places=2, blank=False)  # Dolares
     costoPorHoraRecargo = models.DecimalField(max_digits=6, decimal_places=2, default=0.0, blank=True)
