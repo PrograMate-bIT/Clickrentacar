@@ -6,7 +6,7 @@ from django.views.generic import CreateView, ListView, DetailView
 from django import forms
 
 
-from .models import Vehicle, Profile
+from .models import Vehicle, Profile, VechiclePublication
 from vehicles.forms import VehicleRegisterForm
 
 
@@ -65,34 +65,8 @@ class VehicleListView(ListView):
 class VehicleDetailView(DetailView):
     model = Vehicle
 
+class VehiclePublicationListView(ListView):
+    model = VechiclePublication
 
-"""
-class MyView(ListView):
-    model = Update
-    template_name = "updates/update.html"
-    paginate_by = 10
-
-    def get_queryset(self):
-        filter_val = self.request.GET.get('filter', 'give-default-value')
-        order = self.request.GET.get('orderby', 'give-default-value')
-        new_context = Update.objects.filter(
-            state=filter_val,
-        ).order_by(order)
-        return new_context
-
-    def get_context_data(self, **kwargs):
-        context = super(MyView, self).get_context_data(**kwargs)
-        context['filter'] = self.request.GET.get('filter', 'give-default-value')
-        context['orderby'] = self.request.GET.get('orderby', 'give-default-value')
-        return context
-
-@method_decorator(login_required, name='dispatch')
-def vehicles(self, request):
-    vehicles = object.vehicles.filter(owner=self.request.user.profile)
-    return render(request, 'vehicles/myVehiclesList.html', {'vehicles':vehicles})
-
-@method_decorator(login_required, name='dispatch')
-def vehicle(request):
-    vehicle = get_object_or_404(Vehicle, id=id)
-    return render(request, 'vehicles/vehiclesList.html', {'vehicle': vehicle})
-"""
+class VehiclePublicationDetailView(DetailView):
+    model = VechiclePublication
