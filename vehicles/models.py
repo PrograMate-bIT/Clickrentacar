@@ -14,6 +14,7 @@ class Vehicle(models.Model):
     class Meta:
         ordering = ['carRegistration']
 
+
 class VechiclePublication(models.Model):
     id = models.IntegerField(primary_key=True)
     vehicle = models.ForeignKey(Vehicle, verbose_name="Vehiculo", blank=False, null=False, on_delete=models.CASCADE)
