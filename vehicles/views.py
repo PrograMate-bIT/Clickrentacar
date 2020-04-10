@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView
 from django import forms
 from .models import Vehicle, Profile, VechiclePublication
-from vehicles.forms import VehicleRegisterForm
+from vehicles.forms import VehicleRegisterForm, VehiclePublicationForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -13,7 +13,7 @@ class VehicleRegisterView(CreateView):
     template_name = "vehicles/vehicleRegister.html"
 
     def get_success_url(self):
-        return reverse_lazy('home') + '?register'
+        return reverse_lazy('my_vehicles') + '?register'
 
     def get_form(self, form_class=None):
         form = super(VehicleRegisterView, self).get_form()
@@ -62,8 +62,10 @@ class VehicleListView(ListView):
 class VehicleDetailView(DetailView):
     model = Vehicle
 
+
 class VehiclePublicationListView(ListView):
     model = VechiclePublication
+
 
 class VehiclePublicationDetailView(DetailView):
     model = VechiclePublication
@@ -72,6 +74,8 @@ class VehiclePublicationDetailView(DetailView):
 @method_decorator(login_required, name='dispatch')
 class CreatePublicationView(CreateView):
     model = VechiclePublication
+
+    form_class = VehiclePublicationForm
     template_name = "vehicles/createPublication.html"
 
     def get_success_url(self):
@@ -79,9 +83,6 @@ class CreatePublicationView(CreateView):
 
     def get_form(self, form_class=None):
         form = super(CreatePublicationView, self).get_form()
-
-        form.fields['vehicle'].widget = forms.TextInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Vehículo'})
 
         form.fields['price'].widget = forms.NumberInput(
             attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
@@ -92,10 +93,9 @@ class CreatePublicationView(CreateView):
         form.fields['description'].widget = forms.TextInput(
             attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
 
-        form.fields['carPhoto'].widget = forms.FileField(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Foto'})
         return form
 
     def form_valid(self, form):
-        form.instance.owner = self.request.user.profile
+        form.instance.publisher = self.request.user.profile
+        form.instance.vehicle = Vehicle.objects.get(id=self.kwargs.get('veihcle_pk'))
         return super().form_valid(form)

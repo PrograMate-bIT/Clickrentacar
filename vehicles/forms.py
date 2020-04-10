@@ -7,16 +7,20 @@ class VehicleRegisterForm(forms.ModelForm):
         model = Vehicle
         fields = ['carRegistration', 'brand', 'carModel', 'year', 'seatsNumber']
         widgets = {
-            'carRegistration': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
+            'carRegistration': forms.TextInput(
+                attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
             'brand': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
-            'carModel': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
+            'carModel': forms.TextInput(
+                attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
             'year': forms.NumberInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
-            'seatsNumber': forms.NumberInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'})
+            'seatsNumber': forms.NumberInput(
+                attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'})
         }
 
     def save_model(self, request, obj, form, change):
         obj.added_by = request.user
         super().save_model(request, obj, form, change)
+
 
 class VehiclePublicationForm(forms.ModelForm):
     class Meta:
@@ -24,7 +28,8 @@ class VehiclePublicationForm(forms.ModelForm):
         fields = ['price', 'description']
         widgets = {
             'price': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
-            'description': forms.NumberInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '200'})
+            'description': forms.NumberInput(
+                attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '100'})
         }
 
     def save_model(self, request, obj, form, change):

@@ -19,6 +19,7 @@ class VechiclePublication(models.Model):
     id = models.IntegerField(primary_key=True)
     vehicle = models.ForeignKey(Vehicle, verbose_name="Vehiculo", blank=False, null=False, on_delete=models.CASCADE)
     price = models.IntegerField(blank=False, null=False)
-    publisher = models.ForeignKey(Profile, verbose_name="Propietario", blank=False, null=False, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Profile, verbose_name="Propietario", blank=False, null=False,
+                                  on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True)
     carPhoto = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
