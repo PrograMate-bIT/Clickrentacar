@@ -4,22 +4,22 @@
 {% block content %}
 
 <main role="main">
-    <div class="container mb-4">
-        {% for vehiclep in object_list%}
-        <div class="row mt-3">
-            <div class="col-md-9 mx-auto">
-                <h1 class="mb-4">{{vehiclep.vehicle.brand}}</h1>
-                <h4 class="mb-4">Modelo: {{vehiclep.vehicle.carModel}}</h4>
-                <h4 class="mb-4">{{vehiclep.vehicle.seatsNumber}} asientos</h4>
-                <h4 class="mb-4">${{vehiclep.price}} /hora</h4>
-                <div>
-                    <p>{{vehiclep.content|striptags|safe|truncatechars:"200"}}</p>
-                    <p><a href="{% url 'vehicle_publication' vehiclep.id %}">Leer más</a>
-                    </p>
-                </div>
-            </div>
+  <div class="container mb-4">
+    {% for vehiclep in object_list%}
+      <div class="row mt-3">
+        <div class="col-md-9 mx-auto">
+          <h1 class="mb-4">{{vehiclep.vehicle.brand}}</h1>
+            <h4 class="mb-4">Modelo: {{vehiclep.vehicle.carModel}}</h4>
+            <h4 class="mb-4">{{vehiclep.vehicle.seatsNumber}} asientos</h4>
+            <h4 class="mb-4">${{vehiclep.price}} /hora</h4>
+          <div>
+            <p>{{vehiclep.content|striptags|safe|truncatechars:"200"}}</p>
+            <p><a href="{% url 'vehicle_publication' vehiclep.id %}">Leer más</a>
+            </p>
+          </div>
         </div>
-        {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
+  </div>
 </main>
 {% endblock %}

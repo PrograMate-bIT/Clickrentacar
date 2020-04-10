@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Profile
 
-
 class UserCreationFormWithEmail(UserCreationForm):
     email = forms.EmailField(required=True, help_text="Requerido. 254 carácteres como máximo y debe ser válido.")
 
@@ -23,12 +22,12 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['avatar', 'bio', 'ci', 'phone', 'birthDate', 'adress']
         widgets = {
-            'avatar': forms.ClearableFileInput(attrs={'class': 'form-control-file mt-3'}),
-            'bio': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows': 3, 'placeholder': 'Biografía'}),
-            'ci': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Cedula'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Telefono'}),
-            'birthDate': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Fecha de nacimiento'}),
-            'adress': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Direccion'}),
+            'avatar': forms.ClearableFileInput(attrs={'class':'form-control-file mt-3'}),
+            'bio': forms.Textarea(attrs={'class':'form-control mt-3', 'rows':3, 'placeholder':'Biografía'}),
+            'ci': forms.TextInput(attrs={'class':'form-control mt-3', 'placeholder':'Cedula'}),
+            'phone': forms.TextInput(attrs={'class':'form-control mt-3', 'placeholder':'Telefono'}),
+            'birthDate': forms.TextInput(attrs={'class':'form-control mt-3', 'placeholder':'Fecha de nacimiento'}),
+            'adress': forms.TextInput(attrs={'class':'form-control mt-3', 'placeholder':'Direccion'}),
         }
 
 

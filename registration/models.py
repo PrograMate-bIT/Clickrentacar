@@ -3,12 +3,10 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
-
 def custom_upload_to(instance, filename):
     old_instance = Profile.objects.get(pk=instance.pk)
     old_instance.avatar.delete()
     return 'profiles/' + filename
-
 
 # Create your models here.
 class Profile(models.Model):
@@ -19,11 +17,10 @@ class Profile(models.Model):
     ci = models.IntegerField(verbose_name="ci", primary_key=True, null=False, blank=False)
     phone = models.IntegerField(verbose_name="telefono", null=True, blank=True)
     birthDate = models.DateField(verbose_name="fechaNacimiento", null=True, blank=True)
-    adress = models.CharField(verbose_name="calle", max_length=50, blank=False, null=True)
+    adress = models.CharField(verbose_name="calle",max_length=50, blank=False, null=True)
 
     class Meta:
         ordering = ['user__username']
-
 
 @receiver(post_save, sender=User)
 def ensure_profile_exists(sender, instance, **kwargs):
