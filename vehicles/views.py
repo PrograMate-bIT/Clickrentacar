@@ -1,13 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_list_or_404, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView
 from django import forms
-from peewee import Update
 
-from .models import Vehicle, Profile
-from vehicles.forms import VehicleRegisterForm
+from .models import Vehicle, Profile, VechiclePublication
+from vehicles.forms import VehicleRegisterForm, VehiclePublicationForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -16,7 +14,7 @@ class VehicleRegisterView(CreateView):
     template_name = "vehicles/vehicleRegister.html"
 
     def get_success_url(self):
-        return reverse_lazy('home') + '?register'
+        return reverse_lazy('my_vehicles') + '?register'
 
     def get_form(self, form_class=None):
         form = super(VehicleRegisterView, self).get_form()
@@ -63,36 +61,41 @@ class VehicleListView(ListView):
 
 
 class VehicleDetailView(DetailView):
-    model = Vehicle()
+    model = Vehicle
 
 
-"""
-class MyView(ListView):
-    model = Update
-    template_name = "updates/update.html"
-    paginate_by = 10
+class VehiclePublicationListView(ListView):
+    model = VechiclePublication
 
-    def get_queryset(self):
-        filter_val = self.request.GET.get('filter', 'give-default-value')
-        order = self.request.GET.get('orderby', 'give-default-value')
-        new_context = Update.objects.filter(
-            state=filter_val,
-        ).order_by(order)
-        return new_context
 
-    def get_context_data(self, **kwargs):
-        context = super(MyView, self).get_context_data(**kwargs)
-        context['filter'] = self.request.GET.get('filter', 'give-default-value')
-        context['orderby'] = self.request.GET.get('orderby', 'give-default-value')
-        return context
+class VehiclePublicationDetailView(DetailView):
+    model = VechiclePublication
+
 
 @method_decorator(login_required, name='dispatch')
-def vehicles(self, request):
-    vehicles = object.vehicles.filter(owner=self.request.user.profile)
-    return render(request, 'vehicles/myVehiclesList.html', {'vehicles':vehicles})
+class CreatePublicationView(CreateView):
+    model = VechiclePublication
+    form_class = VehiclePublicationForm
+    template_name = "vehicles/createPublication.html"
 
-@method_decorator(login_required, name='dispatch')
-def vehicle(request):
-    vehicle = get_object_or_404(Vehicle, id=id)
-    return render(request, 'vehicles/vehiclesList.html', {'vehicle': vehicle})
-"""
+    def get_success_url(self):
+        return reverse_lazy('my_vehicles') + '?published'
+
+    def get_form(self, form_class=None):
+        form = super(CreatePublicationView, self).get_form()
+
+        form.fields['price'].widget = forms.NumberInput(
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
+        '''
+        form.fields['publisher'].widget = forms.NumberInput(
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Dueño'})
+        '''
+        form.fields['description'].widget = forms.TextInput(
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
+
+        return form
+
+    def form_valid(self, form):
+        form.instance.publisher = self.request.user.profile
+        form.instance.vehicle =
+        return super().form_valid(form)
