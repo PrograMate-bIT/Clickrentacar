@@ -3,7 +3,6 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView
 from django import forms
-
 from .models import Vehicle, Profile, VechiclePublication
 from vehicles.forms import VehicleRegisterForm, VehiclePublicationForm
 
