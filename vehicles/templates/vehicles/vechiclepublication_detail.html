@@ -18,7 +18,11 @@
             <h4 class="mb-4">Precio: ${{object.price}} /hora</h4>
             <h4 class="mb-4">Descripcion</h4>
             <h6 class="mb-4">{{object.description}} /hora</h6>
-            <p><a href="{% url 'home' }">Solicitar alquiler</a></p>
+          {% if not request.user.is_authenticated %}
+            <a href="{% url 'login' %}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
+          {% else %}
+            <a href="{% url 'home' %}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
+          {% endif %}
         </div>
       </div>
     </div>

@@ -17,3 +17,16 @@ class VehicleRegisterForm(forms.ModelForm):
     def save_model(self, request, obj, form, change):
         obj.added_by = request.user
         super().save_model(request, obj, form, change)
+
+class VehiclePublicationForm(forms.ModelForm):
+    class Meta:
+        model = VechiclePublication
+        fields = ['price', 'description']
+        widgets = {
+            'price': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
+            'description': forms.NumberInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '200'})
+        }
+
+    def save_model(self, request, obj, form, change):
+        obj.added_by = request.user
+        super().save_model(request, obj, form, change)

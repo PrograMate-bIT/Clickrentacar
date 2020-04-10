@@ -67,3 +67,35 @@ class VehiclePublicationListView(ListView):
 
 class VehiclePublicationDetailView(DetailView):
     model = VechiclePublication
+
+
+@method_decorator(login_required, name='dispatch')
+class CreatePublicationView(CreateView):
+    model = VechiclePublication
+    template_name = "vehicles/createPublication.html"
+
+    def get_success_url(self):
+        return reverse_lazy('my_vehicles') + '?published'
+
+    def get_form(self, form_class=None):
+        form = super(CreatePublicationView, self).get_form()
+
+        form.fields['vehicle'].widget = forms.TextInput(
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Vehículo'})
+
+        form.fields['price'].widget = forms.NumberInput(
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
+        '''
+        form.fields['publisher'].widget = forms.NumberInput(
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Dueño'})
+        '''
+        form.fields['description'].widget = forms.TextInput(
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
+
+        form.fields['carPhoto'].widget = forms.FileField(
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Foto'})
+        return form
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user.profile
+        return super().form_valid(form)
