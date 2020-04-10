@@ -75,6 +75,7 @@ class VehiclePublicationDetailView(DetailView):
 @method_decorator(login_required, name='dispatch')
 class CreatePublicationView(CreateView):
     model = VechiclePublication
+
     form_class = VehiclePublicationForm
     template_name = "vehicles/createPublication.html"
 
@@ -97,5 +98,5 @@ class CreatePublicationView(CreateView):
 
     def form_valid(self, form):
         form.instance.publisher = self.request.user.profile
-        form.instance.vehicle =
+        form.instance.vehicle = Vehicle.objects.get(id=self.kwargs.get('veihcle_pk'))
         return super().form_valid(form)
