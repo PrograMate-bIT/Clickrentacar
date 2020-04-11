@@ -13,21 +13,16 @@ class VehicleRegisterView(CreateView):
     template_name = "vehicles/vehicleRegister.html"
 
     def get_success_url(self):
-        return reverse_lazy('my_vehicles') + '?register'
+        return reverse_lazy('my_vehicles') + '?requested'
 
     def get_form(self, form_class=None):
         form = super(VehicleRegisterView, self).get_form()
 
-        form.fields['carRegistration'].widget = forms.TextInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Matricula'})
-        form.fields['brand'].widget = forms.TextInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Marca'})
-        form.fields['carModel'].widget = forms.TextInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Modelo'})
-        form.fields['year'].widget = forms.NumberInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Año'})
-        form.fields['seatsNumber'].widget = forms.NumberInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Numero de asientos'})
+        form.fields['carRegistration'].widget = forms.TextInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Matricula'})
+        form.fields['brand'].widget = forms.TextInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Marca'})
+        form.fields['carModel'].widget = forms.TextInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Modelo'})
+        form.fields['year'].widget = forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Año'})
+        form.fields['seatsNumber'].widget = forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Numero de asientos'})
         return form
 
     def form_valid(self, form):
@@ -84,18 +79,12 @@ class CreatePublicationView(CreateView):
     def get_form(self, form_class=None):
         form = super(CreatePublicationView, self).get_form()
 
-        form.fields['price'].widget = forms.NumberInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
-        '''
-        form.fields['publisher'].widget = forms.NumberInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Dueño'})
-        '''
-        form.fields['description'].widget = forms.TextInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
+        form.fields['price'].widget = forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
+        form.fields['description'].widget = forms.TextInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
 
         return form
 
     def form_valid(self, form):
-        form.instance.publisher = self.request.user.profile
-        form.instance.vehicle = Vehicle.objects.get(id=self.kwargs.get('veihcle_pk'))
+        #form.instance.publisher = self.request.user.profile
+        #form.instance.vehicle = Vehicle.objects.get(id=self.kwargs.get('pk'))
         return super().form_valid(form)

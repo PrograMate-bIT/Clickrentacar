@@ -21,7 +21,7 @@
           {% if not request.user.is_authenticated %}
             <a href="{% url 'login' %}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
           {% else %}
-            <a href="{% url 'home' %}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
+          <a href="{% url 'new_rental_request' object.id%}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
           {% endif %}
         </div>
       </div>
