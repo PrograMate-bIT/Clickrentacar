@@ -85,6 +85,6 @@ class CreatePublicationView(CreateView):
         return form
 
     def form_valid(self, form):
-        #form.instance.publisher = self.request.user.profile
-        #form.instance.vehicle = Vehicle.objects.get(id=self.kwargs.get('pk'))
+        form.instance.publisher = self.request.user.profile
+        form.instance.vehicle = Vehicle.objects.get(id=self.kwargs.get('pk'))
         return super().form_valid(form)
