@@ -84,15 +84,9 @@ class CreatePublicationView(CreateView):
     def get_form(self, form_class=None):
         form = super(CreatePublicationView, self).get_form()
 
-        form.fields['price'].widget = forms.NumberInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
-        '''
-        form.fields['publisher'].widget = forms.NumberInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Dueño'})
-        '''
-        form.fields['description'].widget = forms.TextInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
 
+        form.fields['price'].widget = forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
+        form.fields['description'].widget = forms.TextInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
         return form
 
     def form_valid(self, form):

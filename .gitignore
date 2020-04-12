@@ -128,3 +128,4 @@ BORRAR db.bat
 db.sqlite3
 registration/migrations/0001_initial.py
 rental/migrations/0001_initial.py
+
