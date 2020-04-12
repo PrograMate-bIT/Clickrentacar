@@ -74,7 +74,6 @@ class VehiclePublicationDetailView(DetailView):
 @method_decorator(login_required, name='dispatch')
 class CreatePublicationView(CreateView):
     model = VechiclePublication
-
     form_class = VehiclePublicationForm
     template_name = "vehicles/createPublication.html"
 
