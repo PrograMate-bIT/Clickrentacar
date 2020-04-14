@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Páginas{% endblock %}
+{% block content %}
+
+<main role="main">
+    <div class="container mb-4">
+        {% for req in request_list %}
+        <div class="row mt-3">
+            <div class="col-md-9 mx-auto">
+
+                    <div class="col-md-9 mx-auto">
+                        <h3>Desde:</h3>
+                        {{ req.dateFrom }} {{ req.timeFrom }}
+                        <h3>Hasta:</h3>
+                        {{ req.dateTo }} {{ req.timeTo }}
+                        <h3>Comentario:</h3>
+                        {{ req.Commentary }}
+                    </div>
+                <div class="col-md-9 mx-auto">
+                    <a href="{% url 'home' %}" type="button"class="btn btn-primary">Aprobar</a>
+                    <a href="{% url 'home' %}" type="button"class="btn btn-primary">Rechazar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

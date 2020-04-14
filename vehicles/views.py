@@ -88,3 +88,10 @@ class CreatePublicationView(CreateView):
         form.instance.publisher = self.request.user.profile
         form.instance.vehicle = Vehicle.objects.get(id=self.kwargs.get('pk'))
         return super().form_valid(form)
+
+@method_decorator(login_required, name='dispatch')
+class MyVechiclePublication(ListView):
+    model = VechiclePublication
+
+    def get_queryset(self):
+        return VechiclePublication.objects.filter(publisher=self.request.user.profile)
