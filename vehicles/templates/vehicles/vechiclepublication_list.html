@@ -14,7 +14,11 @@
                 <h4 class="mb-4">${{vehiclep.price}} /hora</h4>
                 <div>
                     <p>{{vehiclep.content|striptags|safe|truncatechars:"200"}}</p>
+                    {% if vehiclep.publisher == request.user.profile %}
+                    <p><a href="{% url 'rental_request' vehiclep.id%}">Ver solicitudes</a>
+                    {% else %}
                     <p><a href="{% url 'vehicle_publication' vehiclep.id %}">Leer más</a>
+                    {% endif %}
                     </p>
                 </div>
             </div>

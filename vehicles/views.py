@@ -83,8 +83,8 @@ class CreatePublicationView(CreateView):
 
     def get_form(self, form_class=None):
         form = super(CreatePublicationView, self).get_form()
-
-
+        form.fields['price'].widget = forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
+        form.fields['description'].widget = forms.TextInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
         form.fields['price'].widget = forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Precio'})
         form.fields['description'].widget = forms.TextInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Descripción'})
         return form
@@ -93,3 +93,10 @@ class CreatePublicationView(CreateView):
         form.instance.publisher = self.request.user.profile
         form.instance.vehicle = Vehicle.objects.get(id=self.kwargs.get('veihcle_pk'))
         return super().form_valid(form)
+
+@method_decorator(login_required, name='dispatch')
+class MyVechiclePublication(ListView):
+    model = VechiclePublication
+
+    def get_queryset(self):
+        return VechiclePublication.objects.filter(publisher=self.request.user.profile)

@@ -22,17 +22,14 @@ class Request(models.Model):
 class Confirmed(models.Model):
     id = models.IntegerField(primary_key=True)
     requestRent = models.OneToOneField(Request, on_delete=models.CASCADE)
-    startDate = models.DateField(auto_now_add=False, blank=True,
-                                 null=True, )  # FECHAS ACORDADAS ENTRE CLIENTE Y PROPIETARIO
+    startDate = models.DateField(auto_now_add=False, blank=True, null=True, )  # FECHAS ACORDADAS ENTRE CLIENTE Y PROPIETARIO
     endDate = models.DateField(auto_now_add=False, blank=True, null=True)
     starTime = models.TimeField(auto_now_add=False, default='9.0.0.0', blank=True, null=True)
     endTime = models.TimeField(auto_now_add=False, default='9.0.0.0', blank=True, null=True)
     returnUserDate = models.DateField(auto_now_add=False, blank=True, null=True)  # FECHAS REALES de Devolución
-    Commentary = models.CharField(max_length=75, null=True,
-                                  blank=True)  # comentarios del alquiler(lo rellena el usuario que alquila)
+    Commentary = models.CharField(max_length=75, null=True, blank=True) # comentarios del alquiler(lo rellena el usuario que alquila)
     priceHour = models.DecimalField(max_digits=6, decimal_places=2, blank=False, null=True)  # Dolares
-    priceHourSurcharge = models.DecimalField(max_digits=6, decimal_places=2, default=0.0, blank=True,
-                                             null=True)  # precio por hora de recargo
+    priceHourSurcharge = models.DecimalField(max_digits=6, decimal_places=2, default=0.0, blank=True, null=True)  # precio por hora de recargo
     Qualification = models.IntegerField(default=1, blank=True, null=True)
     Observations = models.CharField(max_length=200, blank=True)  # Observaciones por parte del dueño del vehículo
     # devueltoDate puede no ser ingresado (blank=False), para cuando un vehiculo aun no fue devuelto
