@@ -2,6 +2,7 @@ from django import forms
 from rental.models import Request, Confirmed
 
 
+
 class RentalRequestForm(forms.ModelForm):
     class Meta:
         model = Request
@@ -29,3 +30,4 @@ class RentalConfirmedForm(forms.ModelForm):
         'endTime' : forms.TimeInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Hora hasta', 'max_length': '15'}),
         'priceHour' : forms.NumberInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Precio', 'max_length': '15'}),
         }
+

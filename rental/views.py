@@ -61,3 +61,4 @@ class CreateConfirmedRentalView(CreateView):
     def form_valid(self, form):
         form.instance.requestRent = Request.objects.get(idSol=self.kwargs.get('pk'))
         return super().form_valid(form)
+

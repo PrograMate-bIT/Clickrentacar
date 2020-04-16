@@ -1,4 +1,5 @@
 from django.urls import path
+from rental.views import CreateRentalView
 
 from rental.views import CreateRentalView, MyCarRequestView, CreateConfirmedRentalView
 
