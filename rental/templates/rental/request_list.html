@@ -5,25 +5,28 @@
 
 <main role="main">
     <div class="container mb-4">
-        {% for req in request_list %}
-        <div class="row mt-3">
-            <div class="col-md-9 mx-auto">
-
-                    <div class="col-md-9 mx-auto">
-                        <h4>Desde:</h4>
-                        {{ req.dateFrom }} {{ req.timeFrom }}
-                        <h4>Hasta:</h4>
-                        {{ req.dateTo }} {{ req.timeTo }}
-                        <h4>Comentario:</h4>
-                        {{ req.Commentary }}
-                    </div>
+        {% if not request_list %}
+        <h4>Aun no has solicitado alquilar vehiculos</h4>
+        {% else %}
+            {% for req in request_list %}
+            <div class="row mt-3">
                 <div class="col-md-9 mx-auto">
-                    <a href="{% url 'rental_aprobe' req.idSol%}" type="button"class="btn btn-primary">Aprobar</a>
-                    <a href="{% url 'home' %}" type="button"class="btn btn-primary">Rechazar</a>
+                        <div class="col-md-9 mx-auto">
+                            <h4>Desde:</h4>
+                            {{ req.dateFrom }} {{ req.timeFrom }}
+                            <h4>Hasta:</h4>
+                            {{ req.dateTo }} {{ req.timeTo }}
+                            <h4>Comentario:</h4>
+                            {{ req.Commentary }}
+                        </div>
+                    <div class="col-md-9 mx-auto">
+                        <a href="{% url 'rental_aprobe' req.idSol%}" type="button"class="btn btn-primary">Aprobar</a>
+                        <a href="{% url 'home' %}" type="button"class="btn btn-primary">Rechazar</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
     </div>
 </main>
 {% endblock %}
