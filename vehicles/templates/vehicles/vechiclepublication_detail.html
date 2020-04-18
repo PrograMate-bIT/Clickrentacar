@@ -10,14 +10,16 @@
         <h2 class="section-heading mb-4">{{object.title}}</h2>
         <div>
           {{object.content|safe}}
-            <h4 class="mb-4">Modelo: {{object.vehicle.carModel}}</h4>
-            <h4 class="mb-4">Matricula: {{object.vehicle.carRegistration}}</h4>
-            <h4 class="mb-4">{{object.vehicle.seatsNumber}} asientos</h4>
-            <h4 class="mb-4">Matricula: {{object.vehicle.year}}</h4>
-            <h4 class="mb-4">Propietario: {{object.vehicle.owner.ci}}</h4>
-            <h4 class="mb-4">Precio: ${{object.price}} /hora</h4>
-            <h4 class="mb-4">Descripcion</h4>
-            <h6 class="mb-4">{{object.description}} /hora</h6>
+          <h4 class="mb-4">Modelo: <b>{{object.vehicle.carModel}}</b></h4>
+            <h4 class="mb-4">Matricula: <b>{{object.vehicle.carRegistration}}</b></h4>
+            <h4 class="mb-4">Asientos: <b>{{object.vehicle.seatsNumber}}</b></h4>
+            <h4 class="mb-4">Matricula: <b>{{object.vehicle.year}}</b></h4>
+            <h4 class="mb-4">Propietario: <b>{{object.vehicle.owner.ci}}</b></h4>
+            <h4 class="mb-4">Precio: <b>${{object.price}} /hora</b></h4>
+            <br><h5 class="mb-4">Descripcion</h5>
+            <div class="alert alert-dark" role="alert">
+              <h6 class="mb-4">{{object.description}}</h6>
+            </div>
           {% if not request.user.is_authenticated %}
             <a href="{% url 'login' %}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
           {% else %}
