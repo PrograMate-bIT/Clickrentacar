@@ -1,0 +1,29 @@
+{% load static %}
+{% block loop_item %}
+<div class="col-md-4 col-lg-3 mt-3">
+    <div class="card" style="width: 15rem;">
+        <a class="portfolio-item d-block mx-auto" href="{% url 'vehicle_publication' vehiclep.id %}">
+            {% if request.user.vehicle.avatar %}
+            <img class="card-img-top" src="{{request.user.vehicle.carPhoto.url}}" class="img-fluid"
+                 alt="Card image cap">
+            <p class="mt-1">¿Borrar? <input type="checkbox" id="avatar-clear" name="avatar-clear"/></p>
+            {% else %}
+            <img class="card-img-top" src="{% static 'vehicle/img/no-carPhoto.jpg' %}" class="img-fluid"
+                 alt="Card image cap">
+            {% endif %}
+        </a>
+        <div class="card-body">
+            <b></b><h5 class="card-title">{{vehiclep.vehicle.brand}} {{vehiclep.vehicle.carModel}}</h5></b>
+            <p class="card-text">{{vehiclep.vehicle.seatsNumber}} asientos<br>${{vehiclep.price}} /hora</p>
+            <div>
+                <p>{{vehiclep.content|striptags|safe|truncatechars:"200"}}</p>
+                {% if vehiclep.publisher == request.user.profile %}
+                <a href="{% url 'rental_request' vehiclep.id%}" class="btn btn-primary align-center">Ver solicitudes</a>
+                {% else %}
+                <a href="{% url 'vehicle_publication' vehiclep.id %}" class="btn btn-primary">Ver más</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
