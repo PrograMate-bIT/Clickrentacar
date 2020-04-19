@@ -27,14 +27,17 @@
                             </div>
                             <div class="col-md-9 mx-auto">
                                 <h3>{{ vehicle.brand }} {{ vehicle.carModel }}</h3>
-                                <!-- Button trigger modal -->
+                                <!-- Button trigger a PUBLICAR -->
+                                {% if vehicle.published %}
+                                <button type="button" class="btn btn-success" disabled>Publicado</button>
+                                {% else %}
+                                <a href="{% url 'new_publication' vehicle.id %}" type="button" class="btn btn-primary">Publicar</a>
+                                {% endif %}
+                                <!-- Button trigger modal DETALLES -->
                                 <button type="button" class="btn btn-secondary" data-toggle="modal"
                                         data-target="#{{ vehicle.id }}DetailModal">
                                     Detalles
                                 </button>
-                                <!-- Button trigger a PUBLICAR -->
-                                <a href="{% url 'new_publication' vehicle.id %}" type="button"
-                                   class="btn btn-primary">Publicar</a>
                             </div>
                         </div>
                     {% endfor %}
