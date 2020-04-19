@@ -1,8 +1,5 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from registration.models import Profile, custom_upload_to
-from rental.models import Confirmed
 
 
 class Vehicle(models.Model):
@@ -13,6 +10,7 @@ class Vehicle(models.Model):
     carModel = models.CharField(max_length=15, blank=False)
     year = models.IntegerField(default=1900, blank=True)
     seatsNumber = models.IntegerField(2, blank=True)
+    published = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['carRegistration']

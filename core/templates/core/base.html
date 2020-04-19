@@ -38,27 +38,41 @@
                     <a class="nav-link" href="{% url 'signup' %}">Registro</a>
                 </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'my_vehicles' %}">Mis vehiculos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'vehicleRegister' %}">Registrar vehiculo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'my_publications' %}">Mis publicaciones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'rental_confirmed' %}">Mis alquileres</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'request_confirmed' %}">Mis solicitudes aprobadas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Salir</a>
-                </li>
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <div class="btn-group" role="group">
+                            <button id="Alquileres" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Alquileres
+                            </button>
+                               <div class="dropdown-menu" aria-labelledby="Alquileres">
+                                <a class="dropdown-item" href="{% url 'rental_confirmed' %}">Mis alquileres concretados</a>
+                                <a class="dropdown-item" href="{% url 'request_confirmed' %}">Mis solicitudes aprobadas</a>
+                            </div>
+                        </div>
+                </div>
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <div class="btn-group" role="group">
+                            <button id="Vehiculos" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Vehiculos
+                            </button>
+                               <div class="dropdown-menu" aria-labelledby="Vehiculos">
+                                <a class="dropdown-item" href= "{% url 'vehicleRegister' %}">Registrar Vehiculo</a>
+                                <a class="dropdown-item" href="{% url 'my_vehicles' %}">Mis vehiculos</a>
+                                <a class="dropdown-item" href= "{% url 'my_publications' %}">Mis publicaciones</a>
+                            </div>
+                        </div>
+                </div>
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 {{ user.get_username }}
+                            </button>
+                               <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="{% url 'profile' %}">Perfil</a>
+                                <a class="dropdown-item" href="{% url 'logout' %}">Salir</a>
+                            </div>
+                        </div>
+                </div>
+
                 {% endif %}
             </ul>
         </div>
