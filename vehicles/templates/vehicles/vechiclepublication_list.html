@@ -1,56 +1,29 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% block title %}
-    {% if request.path == '/vehicles/my_publications/' %}
-        Mis Publicaciones
-    {% else %}
-        Publicaciones
-    {% endif %}
-{% endblock %}
+{% block title %}Páginas{% endblock %}
 {% block content %}
 
 <main role="main">
     <div class="container mb-4">
-        {% if object_list %}
-            {% for vehiclep in object_list %}
-            <div class="row mt-3">
-                <div class="col-md-9 mx-auto">
-                    <h1 class="mb-4">{{vehiclep.vehicle.brand}}</h1>
-                    <h4 class="mb-4">Modelo: {{vehiclep.vehicle.carModel}}</h4>
-                    <h4 class="mb-4">{{vehiclep.vehicle.seatsNumber}} asientos</h4>
-                    <h4 class="mb-4">${{vehiclep.price}} /hora</h4>
-                    <div>
-                        <p>{{vehiclep.content|striptags|safe|truncatechars:"200"}}</p>
-                        {% if request.path == '/vehicles/my_publications/' %}
-                            {% if vehiclep.publisher == request.user.profile %}
-                            <p><a href="{% url 'rental_request' vehiclep.id%}">Ver solicitudes</a>
-                            {% else %}
-                            <p><a href="{% url 'vehicle_publication' vehiclep.id %}">Leer más</a>
-                            {% endif %}
-                            </p>
-                        {% else %}
-                            <p><a href="{% url 'vehicle_publication' vehiclep.id %}">Ver más</a></p>
-                        {% endif %}
-                    </div>
+        {% for vehiclep in object_list%}
+        <div class="row mt-3">
+            <div class="col-md-9 mx-auto">
+                <h1 class="mb-4">{{vehiclep.vehicle.brand}}</h1>
+                <h4 class="mb-4">Modelo: {{vehiclep.vehicle.carModel}}</h4>
+                <h4 class="mb-4">{{vehiclep.vehicle.seatsNumber}} asientos</h4>
+                <h4 class="mb-4">${{vehiclep.price}} /hora</h4>
+                <div>
+                    <p>{{vehiclep.content|striptags|safe|truncatechars:"200"}}</p>
+                    {% if vehiclep.publisher == request.user.profile %}
+                    <p><a href="{% url 'rental_request' vehiclep.id%}">Ver solicitudes</a>
+                    {% else %}
+                    <p><a href="{% url 'vehicle_publication' vehiclep.id %}">Leer más</a>
+                    {% endif %}
+                    </p>
                 </div>
             </div>
-            {% endfor %}
-        {% else %}
-            <div class="alert alert-warning" role="alert">
-                {% if request.user.is_authenticated %}
-                    {% if request.path == '/vehicles/my_publications/' %}
-                        <h2>¡Aún no has publicado ningún vehículo!</h2>
-                        <a class="nav-link" href="{% url 'my_vehicles' %}">Publicar un vehículo</a>
-                    {% else %}
-                    <h2>¡Aún nadie ha publicado ningún vehículo!</h2>
-                    <a class="nav-link" href="{% url 'my_vehicles' %}">Sé el primero!</a>
-                    {% endif %}
-                {% else %}
-                    <h2>¡Aún nadie ha publicado ningún vehículo!</h2>
-                    <a class="nav-link" href="{% url 'vehicleRegister' %}">Sé el primero!</a>
-                {% endif %}
-            </div>
-        {% endif %}
+        </div>
+        {% endfor %}
     </div>
 </main>
 {% endblock %}

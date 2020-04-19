@@ -5,7 +5,9 @@
 
 <main role="main">
     <div class="container mb-4">
-        {% if request_list %}
+        {% if not request_list %}
+        <h4>Aun no has solicitado alquilar vehiculos</h4>
+        {% else %}
             {% for req in request_list %}
             <div class="row mt-3">
                 <div class="col-md-9 mx-auto">
@@ -24,11 +26,6 @@
                 </div>
             </div>
             {% endfor %}
-        {% else %}
-            <div class="alert alert-warning" role="alert">
-                <h2>No tienes solicitudes</h2>
-                <a class="nav-link" href="{% url 'my_publications' %}">Volver</a>
-            </div>
         {% endif %}
     </div>
 </main>

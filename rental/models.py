@@ -21,7 +21,9 @@ class Request(models.Model):
 
 class Confirmed(models.Model):
     id = models.IntegerField(primary_key=True)
-    requestRent = models.OneToOneField(Request, on_delete=models.CASCADE)
+    requestRent = models.OneToOneField(Request, null=False, on_delete=models.CASCADE)
+    lessor = models.ForeignKey(Profile, blank=False, null=False, related_name='aplicant', on_delete=models.CASCADE) #el que adquiere el vehiculo temporalmente
+    lessee = models.ForeignKey(Profile, blank=False, null=False, related_name='owner', on_delete=models.CASCADE) #el dueño del vehiculo
     startDate = models.DateField(auto_now_add=False, blank=True, null=True, )  # FECHAS ACORDADAS ENTRE CLIENTE Y PROPIETARIO
     endDate = models.DateField(auto_now_add=False, blank=True, null=True)
     starTime = models.TimeField(auto_now_add=False, default='9.0.0.0', blank=True, null=True)
