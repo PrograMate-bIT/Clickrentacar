@@ -18,9 +18,16 @@
             <div>
                 <p>{{vehiclep.content|striptags|safe|truncatechars:"200"}}</p>
                 {% if vehiclep.publisher == request.user.profile %}
-                <a href="{% url 'rental_request' vehiclep.id%}" class="btn btn-primary align-center">Ver solicitudes</a>
+
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-success align-center disabled"><i class="fas fa-car"></i></button>
+                        <a href="{% url 'rental_request' vehiclep.id%}" class="btn btn-dark align-center">Ver solicitudes</a>
+                    </div>
+
                 {% else %}
-                <a href="{% url 'vehicle_publication' vehiclep.id %}" class="btn btn-primary">Ver más</a>
+
+                    <a href="{% url 'vehicle_publication' vehiclep.id %}" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i> Ver más</a>
                 {% endif %}
             </div>
         </div>
