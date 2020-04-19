@@ -12,11 +12,12 @@ def custom_upload_to(instance, filename):
 
 # Create your models here.
 class Profile(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name="id", null=False, blank=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    ci = models.IntegerField(verbose_name="ci", null=True, blank=True)
     avatar = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     link = models.URLField(max_length=200, null=True, blank=True)
-    ci = models.IntegerField(verbose_name="ci", primary_key=True, null=False, blank=False)
     phone = models.IntegerField(verbose_name="telefono", null=True, blank=True)
     birthDate = models.DateField(verbose_name="fechaNacimiento", null=True, blank=True)
     adress = models.CharField(verbose_name="calle", max_length=50, blank=False, null=True)

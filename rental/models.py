@@ -5,7 +5,7 @@ from vehicles.models import VechiclePublication
 
 class Request(models.Model):
     idSol = models.IntegerField(primary_key=True)  # Solicitud
-    userRequest = models.ForeignKey(Profile, verbose_name="ci", blank=False, null=False, on_delete=models.CASCADE)
+    userRequest = models.ForeignKey(Profile, verbose_name="id", blank=False, null=False, on_delete=models.CASCADE)
     transportPublisher = models.ForeignKey(VechiclePublication, verbose_name="id", blank=False, null=False,
                                            on_delete=models.CASCADE)
     dateRequest = models.DateField(null=True, blank=True)  # fechadesolicitud
