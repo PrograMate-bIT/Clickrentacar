@@ -13,11 +13,10 @@ class Vehicle(models.Model):
     carModel = models.CharField(max_length=15, blank=False)
     year = models.IntegerField(default=1900, blank=True)
     seatsNumber = models.IntegerField(2, blank=True)
-    published = models.BooleanField(default=True)
-
 
     class Meta:
         ordering = ['carRegistration']
+
 
 class VechiclePublication(models.Model):
     id = models.IntegerField(primary_key=True)

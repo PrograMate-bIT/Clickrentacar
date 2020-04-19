@@ -43,8 +43,14 @@ class VehicleListView(ListView):
     def get_vehicles(self):
         # devuelve el vehiculos del usuario logueado
         profile, created = Profile.objects.get_or_create(user=self.request.user)
-        vehicle = Vehicle.objects.all().filter(owner=profile)
-        return vehicle
+        vehicles = Vehicle.objects.all().filter(owner=profile)
+        publications = VechiclePublication.objects.all().filter(publisher=profile)
+        for vehicle in vehicles:
+            for publication in publications:
+                if publication.vehicle == vehicle and publication.published != vehicle.published:
+                    vehicle.published = publication.published
+                    vehicle.save()
+        return vehicles
 
     def get_queryset(self):
         filter_val = self.request.GET.get('filter', 'give-default-value')
