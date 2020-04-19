@@ -27,9 +27,11 @@ class VechiclePublication(models.Model):
     carPhoto = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
     published = models.BooleanField(default=True)
 
+"""
     @receiver(post_save, sender=Confirmed)
     def vehicle_not_published(sender, instance, **kwargs):
         publication = VechiclePublication.objects.get_or_create(
             id = instance.requestRent.transportPublisher.id,
             defaults = {}
         )
+"""
