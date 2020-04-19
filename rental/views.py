@@ -3,8 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView
+
+from registration.models import Profile
 from rental.forms import RentalRequestForm, RentalConfirmedForm
-from rental.models import Request
+from rental.models import Request, Confirmed
 from vehicles.models import VechiclePublication
 
 
@@ -55,10 +57,29 @@ class CreateConfirmedRentalView(CreateView):
         form.fields['endDate'].widget = forms.DateTimeInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Fecha hasta'})
         form.fields['starTime'].widget = forms.TimeInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Hora desde'})
         form.fields['endTime'].widget = forms.TimeInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Hora hasta'})
-        form.fields['priceHour'].widget = forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Comentario'})
+        form.fields['priceHour'].widget = forms.NumberInput(attrs={'class': 'form-control mb-2', 'placeholder': 'Costo por hora'})
         return form
 
     def form_valid(self, form):
         form.instance.requestRent = Request.objects.get(idSol=self.kwargs.get('pk'))
+        form.instance.lessor = self.request.user.profile
+        form.instance.lessee = form.instance.requestRent.userRequest
         return super().form_valid(form)
 
+@method_decorator(login_required, name='dispatch')
+class MyLessorRentals(ListView):
+    template_name = "rental/lessor_list.html"
+    model = Confirmed
+
+    def get_queryset(self):
+        obj = self.request.user.profile
+        return Confirmed.objects.filter(lessor=obj)
+
+@method_decorator(login_required, name='dispatch')
+class MyLesseeRentals(ListView):
+    template_name = "rental/lessee_list.html"
+    model = Confirmed
+
+    def get_queryset(self):
+        obj = self.request.user.profile
+        return Confirmed.objects.filter(lessee=obj)
