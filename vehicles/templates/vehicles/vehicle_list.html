@@ -16,28 +16,18 @@
                     </div>
                 {% else %}
                     {% for vehicle in vehicle_list %}
-                        <div class="row mt-3">
-                            <div class="col-md-2">
-                                {% if request.user.vehicle.avatar %}
-                                <img src="{{request.user.vehicle.carPhoto.url}}" class="img-fluid">
-                                <p class="mt-1">¿Borrar? <input type="checkbox" id="avatar-clear" name="avatar-clear"/></p>
-                                {% else %}
-                                <img src="{% static 'vehicle/img/no-carPhoto.jpg' %}" class="img-fluid">
-                                {% endif %}
-                            </div>
-                            <div class="col-md-9 mx-auto">
-                                <h3>{{ vehicle.brand }} {{ vehicle.carModel }}</h3>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                        data-target="#{{ vehicle.id }}DetailModal">
-                                    Detalles
-                                </button>
-                                <!-- Button trigger a PUBLICAR -->
-                                <a href="{% url 'new_publication' vehicle.id %}" type="button"
-                                   class="btn btn-primary">Publicar</a>
-                            </div>
-                        </div>
+                     <!-- vehicle_list-items.html -->
+                    {% block loop_item %}{% include 'vehicles\vehicle_list-items.html' %}{% endblock %}
                     {% endfor %}
+                    <div class="row mt-3">
+                        <div class="col-md-2">
+                            <img src="{% static 'vehicle/img/add.jpg' %}" class="img-fluid">
+                        </div>
+                        <div class="col-md-9 mx-auto">
+                            <h3>Nuevo vehículo</h3>
+                            <a href="{% url 'vehicleRegister' %}" type="button" class="btn btn-primary">Agregar</a>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
         </div>
