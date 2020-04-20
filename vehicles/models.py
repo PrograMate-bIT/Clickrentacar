@@ -10,7 +10,7 @@ class Vehicle(models.Model):
     carModel = models.CharField(max_length=15, blank=False)
     year = models.IntegerField(default=1900, blank=True)
     seatsNumber = models.IntegerField(2, blank=True)
-    published = models.BooleanField(default=True)
+    published = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['carRegistration']
