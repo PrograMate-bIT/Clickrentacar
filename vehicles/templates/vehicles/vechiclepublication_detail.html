@@ -21,9 +21,13 @@
               <h6 class="mb-4">{{object.description}}</h6>
             </div>
           {% if not request.user.is_authenticated %}
-            <a href="{% url 'login' %}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
+           <a href="{% url 'login' %}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
           {% else %}
-          <a href="{% url 'new_rental_request' object.id%}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
+            {% if request.user.profile.id == object.vehicle.owner.id%}
+              <a href="{% url 'edit_publications' object.id%}"class="btn btn-primary btn-block" role="button">Editar</a>
+            {% else %}
+              <a href="{% url 'new_rental_request' object.id%}"class="btn btn-primary btn-block" role="button">Solicitar alquiler</a>
+            {% endif %}
           {% endif %}
         </div>
       </div>

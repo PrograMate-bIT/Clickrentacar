@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django import forms
 from .models import Vehicle, Profile, VechiclePublication
 from vehicles.forms import VehicleRegisterForm, VehiclePublicationForm
@@ -72,6 +72,9 @@ class VehicleDetailView(DetailView):
 class VehiclePublicationListView(ListView):
     model = VechiclePublication
 
+    def get_queryset(self):
+        return VechiclePublication.objects.filter(published=True)
+
 
 class VehiclePublicationDetailView(DetailView):
     model = VechiclePublication
@@ -106,3 +109,14 @@ class MyVechiclePublication(ListView):
 
     def get_queryset(self):
         return VechiclePublication.objects.filter(publisher=self.request.user.profile)
+
+@method_decorator(login_required, name='dispatch')
+class PublicationUpdate(UpdateView):
+    form_class = VehiclePublicationForm
+    success_url = reverse_lazy('home')
+    template_name = 'vehicles/edit_publications.html'
+
+    def get_object(self):
+        # recuperar el objeto que se va editar
+        publication = VechiclePublication.objects.get(id=self.kwargs.get('pk'))
+        return publication

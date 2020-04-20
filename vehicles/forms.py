@@ -25,11 +25,11 @@ class VehicleRegisterForm(forms.ModelForm):
 class VehiclePublicationForm(forms.ModelForm):
     class Meta:
         model = VechiclePublication
-        fields = ['price', 'description']
+        fields = ['price', 'description', 'published']
         widgets = {
-            'price': forms.TextInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
-            'description': forms.NumberInput(
-                attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '100'})
+            'price': forms.NumberInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '15'}),
+            'description': forms.TextInput( attrs={'class': 'form-control mt-3', 'placeholder': 'Nick', 'max_length': '100'}),
+            'published': forms.CheckboxInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Nick'}),
         }
 
     def save_model(self, request, obj, form, change):

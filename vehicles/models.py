@@ -1,5 +1,4 @@
 from django.db import models
-
 from registration.models import Profile, custom_upload_to
 
 
@@ -16,6 +15,7 @@ class Vehicle(models.Model):
     class Meta:
         ordering = ['carRegistration']
 
+
 class VechiclePublication(models.Model):
     id = models.IntegerField(primary_key=True)
     vehicle = models.OneToOneField(Vehicle, verbose_name="Vehiculo", blank=False, null=False, on_delete=models.CASCADE)
@@ -24,3 +24,12 @@ class VechiclePublication(models.Model):
     description = models.TextField(blank=True, null=True)
     carPhoto = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
     published = models.BooleanField(default=True)
+
+"""
+    @receiver(post_save, sender=Confirmed)
+    def vehicle_not_published(sender, instance, **kwargs):
+        publication = VechiclePublication.objects.get_or_create(
+            id = instance.requestRent.transportPublisher.id,
+            defaults = {}
+        )
+"""
